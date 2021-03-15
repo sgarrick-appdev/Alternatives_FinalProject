@@ -1,0 +1,102 @@
+<div>
+  <div>
+    <h1>
+      List of all alternatives
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new alternative
+    </h2>
+
+    <form action="/insert_alternative" method="post">
+      <div>
+        <label for="original_ingredient_id_box">
+          Original ingredient
+        </label>
+
+        <input type="text" id="original_ingredient_id_box" name="query_original_ingredient_id">
+      </div>
+
+      <div>
+        <label for="alternative_ingredient_id_box">
+          Alternative ingredient
+        </label>
+
+        <input type="text" id="alternative_ingredient_id_box" name="query_alternative_ingredient_id">
+      </div>
+
+      <button>
+        Create alternative
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Original ingredient
+        </th>
+
+        <th>
+          Alternative ingredient
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_alternatives.each do |an_alternative| %>
+      <tr>
+        <td>
+          <%= an_alternative.id %>
+        </td>
+
+        <td>
+          <%= an_alternative.original_ingredient_id %>
+        </td>
+
+        <td>
+          <%= an_alternative.alternative_ingredient_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(an_alternative.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(an_alternative.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/alternatives/<%= an_alternative.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

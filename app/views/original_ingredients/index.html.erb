@@ -1,0 +1,150 @@
+<div>
+  <div>
+    <h1>
+      List of all original ingredients
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new original ingredient
+    </h2>
+
+    <form action="/insert_original_ingredient" method="post">
+      <div>
+        <label for="original_box">
+          Original
+        </label>
+
+        <input type="text" id="original_box" name="query_original">
+      </div>
+
+      <div>
+        <label for="alternative_box">
+          Alternative
+        </label>
+
+        <input type="text" id="alternative_box" name="query_alternative">
+      </div>
+
+      <div>
+        <label for="sensitivity_box">
+          Sensitivity
+        </label>
+
+        <input type="text" id="sensitivity_box" name="query_sensitivity">
+      </div>
+
+      <div>
+        <label for="notes_box">
+          Notes
+        </label>
+
+        <textarea id="notes_box" name="query_notes" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="type_id_box">
+          Type
+        </label>
+
+        <input type="text" id="type_id_box" name="query_type_id">
+      </div>
+
+      <button>
+        Create original ingredient
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Original
+        </th>
+
+        <th>
+          Alternative
+        </th>
+
+        <th>
+          Sensitivity
+        </th>
+
+        <th>
+          Notes
+        </th>
+
+        <th>
+          Type
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_original_ingredients.each do |an_original_ingredient| %>
+      <tr>
+        <td>
+          <%= an_original_ingredient.id %>
+        </td>
+
+        <td>
+          <%= an_original_ingredient.original %>
+        </td>
+
+        <td>
+          <%= an_original_ingredient.alternative %>
+        </td>
+
+        <td>
+          <%= an_original_ingredient.sensitivity %>
+        </td>
+
+        <td>
+          <%= an_original_ingredient.notes %>
+        </td>
+
+        <td>
+          <%= an_original_ingredient.type_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(an_original_ingredient.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(an_original_ingredient.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/original_ingredients/<%= an_original_ingredient.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

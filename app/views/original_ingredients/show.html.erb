@@ -1,0 +1,131 @@
+<div>
+  <div>
+    <h1>
+      Original ingredient #<%= @the_original_ingredient.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/original_ingredients">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_original_ingredient/<%= @the_original_ingredient.id %>">
+          Delete original ingredient
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Original
+      </dt>
+      <dd>
+        <%= @the_original_ingredient.original %>
+      </dd>
+
+      <dt>
+        Alternative
+      </dt>
+      <dd>
+        <%= @the_original_ingredient.alternative %>
+      </dd>
+
+      <dt>
+        Sensitivity
+      </dt>
+      <dd>
+        <%= @the_original_ingredient.sensitivity %>
+      </dd>
+
+      <dt>
+        Notes
+      </dt>
+      <dd>
+        <%= @the_original_ingredient.notes %>
+      </dd>
+
+      <dt>
+        Type
+      </dt>
+      <dd>
+        <%= @the_original_ingredient.type_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_original_ingredient.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_original_ingredient.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit original ingredient
+    </h2>
+
+    <form action="/modify_original_ingredient/<%= @the_original_ingredient.id %>"  method="post" >
+      <div>
+        <label for="original_box">
+          Original
+        </label>
+
+        <input type="text" id="original_box" name="query_original" value="<%= @the_original_ingredient.original %>">
+      </div>
+
+      <div>
+        <label for="alternative_box">
+          Alternative
+        </label>
+
+        <input type="text" id="alternative_box" name="query_alternative" value="<%= @the_original_ingredient.alternative %>">
+      </div>
+
+      <div>
+        <label for="sensitivity_box">
+          Sensitivity
+        </label>
+
+        <input type="text" id="sensitivity_box" name="query_sensitivity" value="<%= @the_original_ingredient.sensitivity %>">
+      </div>
+
+      <div>
+        <label for="notes_box">
+          Notes
+        </label>
+
+        <textarea id="notes_box" name="query_notes"><%= @the_original_ingredient.notes %></textarea>
+      </div>
+
+      <div>
+        <label for="type_id_box">
+          Type
+        </label>
+
+        <input type="text" id="type_id_box" name="query_type_id" value="<%= @the_original_ingredient.type_id %>">
+      </div>
+
+      <button>
+        Update original ingredient
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
