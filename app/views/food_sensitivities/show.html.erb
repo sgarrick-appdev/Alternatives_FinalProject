@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Food sensitivity #<%= @the_food_sensitivity.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/food_sensitivities">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_food_sensitivity/<%= @the_food_sensitivity.id %>">
+          Delete food sensitivity
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Ingredient
+      </dt>
+      <dd>
+        <%= @the_food_sensitivity.ingredient_id %>
+      </dd>
+
+      <dt>
+        Sensitivity
+      </dt>
+      <dd>
+        <%= @the_food_sensitivity.sensitivity_id %>
+      </dd>
+
+      <dt>
+        Dietary
+      </dt>
+      <dd>
+        <%= @the_food_sensitivity.dietary_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_food_sensitivity.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_food_sensitivity.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit food sensitivity
+    </h2>
+
+    <form action="/modify_food_sensitivity/<%= @the_food_sensitivity.id %>"  method="post" >
+      <div>
+        <label for="ingredient_id_box">
+          Ingredient
+        </label>
+
+        <input type="text" id="ingredient_id_box" name="query_ingredient_id" value="<%= @the_food_sensitivity.ingredient_id %>">
+      </div>
+
+      <div>
+        <label for="sensitivity_id_box">
+          Sensitivity
+        </label>
+
+        <input type="text" id="sensitivity_id_box" name="query_sensitivity_id" value="<%= @the_food_sensitivity.sensitivity_id %>">
+      </div>
+
+      <div>
+        <label for="dietary_id_box">
+          Dietary
+        </label>
+
+        <input type="text" id="dietary_id_box" name="query_dietary_id" value="<%= @the_food_sensitivity.dietary_id %>">
+      </div>
+
+      <button>
+        Update food sensitivity
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

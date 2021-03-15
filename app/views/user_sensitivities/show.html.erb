@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      User sensitivity #<%= @the_user_sensitivity.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/user_sensitivities">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_user_sensitivity/<%= @the_user_sensitivity.id %>">
+          Delete user sensitivity
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_user_sensitivity.user_id %>
+      </dd>
+
+      <dt>
+        Sensitivity
+      </dt>
+      <dd>
+        <%= @the_user_sensitivity.sensitivity_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_user_sensitivity.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_user_sensitivity.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit user sensitivity
+    </h2>
+
+    <form action="/modify_user_sensitivity/<%= @the_user_sensitivity.id %>"  method="post" >
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_user_sensitivity.user_id %>">
+      </div>
+
+      <div>
+        <label for="sensitivity_id_box">
+          Sensitivity
+        </label>
+
+        <input type="text" id="sensitivity_id_box" name="query_sensitivity_id" value="<%= @the_user_sensitivity.sensitivity_id %>">
+      </div>
+
+      <button>
+        Update user sensitivity
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

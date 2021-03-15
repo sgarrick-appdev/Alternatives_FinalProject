@@ -1,0 +1,71 @@
+<div>
+  <div>
+    <h1>
+      Sensitivity #<%= @the_sensitivity.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/sensitivities">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_sensitivity/<%= @the_sensitivity.id %>">
+          Delete sensitivity
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Name
+      </dt>
+      <dd>
+        <%= @the_sensitivity.name %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_sensitivity.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_sensitivity.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit sensitivity
+    </h2>
+
+    <form action="/modify_sensitivity/<%= @the_sensitivity.id %>"  method="post" >
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name" value="<%= @the_sensitivity.name %>">
+      </div>
+
+      <button>
+        Update sensitivity
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

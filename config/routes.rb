@@ -1,5 +1,62 @@
 Rails.application.routes.draw do
 
+  # Routes for the User sensitivity resource:
+
+  # CREATE
+  post("/insert_user_sensitivity", { :controller => "user_sensitivities", :action => "create" })
+          
+  # READ
+  get("/user_sensitivities", { :controller => "user_sensitivities", :action => "index" })
+  
+  get("/user_sensitivities/:path_id", { :controller => "user_sensitivities", :action => "show" })
+  
+  # UPDATE
+  
+  post("/modify_user_sensitivity/:path_id", { :controller => "user_sensitivities", :action => "update" })
+  
+  # DELETE
+  get("/delete_user_sensitivity/:path_id", { :controller => "user_sensitivities", :action => "destroy" })
+
+  #------------------------------
+
+  # Routes for the Food sensitivity resource:
+
+  # CREATE
+  post("/insert_food_sensitivity", { :controller => "food_sensitivities", :action => "create" })
+          
+  # READ
+  get("/food_sensitivities", { :controller => "food_sensitivities", :action => "index" })
+  
+  get("/food_sensitivities/:path_id", { :controller => "food_sensitivities", :action => "show" })
+  
+  # UPDATE
+  
+  post("/modify_food_sensitivity/:path_id", { :controller => "food_sensitivities", :action => "update" })
+  
+  # DELETE
+  get("/delete_food_sensitivity/:path_id", { :controller => "food_sensitivities", :action => "destroy" })
+
+  #------------------------------
+
+  # Routes for the Sensitivity resource:
+
+  # CREATE
+  post("/insert_sensitivity", { :controller => "sensitivities", :action => "create" })
+          
+  # READ
+  get("/sensitivities", { :controller => "sensitivities", :action => "index" })
+  
+  get("/sensitivities/:path_id", { :controller => "sensitivities", :action => "show" })
+  
+  # UPDATE
+  
+  post("/modify_sensitivity/:path_id", { :controller => "sensitivities", :action => "update" })
+  
+  # DELETE
+  get("/delete_sensitivity/:path_id", { :controller => "sensitivities", :action => "destroy" })
+
+  #------------------------------
+
 get("/", {:controller => "application", :action => "index"})
 
 

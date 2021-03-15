@@ -12,4 +12,5 @@
 #  type_id     :integer
 #
 class OriginalIngredient < ApplicationRecord
+  belongs_to(:type, { :required => false, :class_name => "Type", :foreign_key => "type_id" })
 end
