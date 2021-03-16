@@ -7,14 +7,19 @@
 <hr>
 
 <%if @user_id != nil%>
-
+<% matching_records = Favorite.where({ :user_id => @user_id, :alternative_id => @the_alternative.id }) %>
+<% favorite = matching_records.at(0) %>
+<% if favorite == nil %>
 <form action = "/insert_favorite" method = "post">
 <input type = "hidden" name = "query_user" value = "<%=@user_id%>">
 <input type = "hidden" name = "query_alt" value = "<%=@the_alternative.id%>">
-<button>Favorite this alternative pair</button>
+<button>Favorite this alternative!</button>
 </form>
-
+<%else%>
+<a href="/delete_favorite/<%= favorite.id %>">Un-favorite</a>
 <%end%>
+<%end%>
+
 <hr>
 
 <h3>Notes about using stevia as an alternative</h3>

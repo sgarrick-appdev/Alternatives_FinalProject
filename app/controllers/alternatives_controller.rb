@@ -20,7 +20,7 @@ class AlternativesController < ApplicationController
     @original_name = matching_ingredient_OG.original
     @user_id = session[:user_id]
     @matching_comments = Comment.all.where({:ingredient_id => the_id})
-
+    @matching_favorite = Favorite.all.where({:user_id => @user_id, :alternative_id => the_id}).first
     render({ :template => "alternatives/show.html.erb" })
   end
 
