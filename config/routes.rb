@@ -57,7 +57,7 @@ Rails.application.routes.draw do
 
   #------------------------------
 
-get("/", {:controller => "application", :action => "index"})
+  get("/", {:controller => "application", :action => "index"})
 
 
   # Routes for the Alternative resource:
@@ -101,6 +101,7 @@ get("/", {:controller => "application", :action => "index"})
   # Routes for the Original ingredient resource:
 
   # CREATE
+  get("/create_new_original_ingredient", {:controller => "original_ingredients", :action => "add_page"})
   post("/insert_original_ingredient", { :controller => "original_ingredients", :action => "create" })
           
   # READ

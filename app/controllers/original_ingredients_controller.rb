@@ -1,11 +1,59 @@
 class OriginalIngredientsController < ApplicationController
   def index
-    matching_original_ingredients = OriginalIngredient.all
+    @list_of_types = Type.all
+    @list_of_sensitivities = Sensitivity.all
+    @list_of_alternatives = Alternative.all
+    @ingredients = OriginalIngredient.all
+    
+    
+    type_id = params.fetch("type_ids")
 
-    @list_of_original_ingredients = matching_original_ingredients.order({ :created_at => :desc })
+    matching_relations = Array.new
+    type_id.each do |an_id|
+
+      matching_ingredients = @ingredients.where(:type_id => an_id)
+      matching_relations.push(matching_ingredients)
+    end
+    
+    @show = Array.new
+    matching_relations.each do |a_relation|
+      @show.push(a_relation.)
+    end
+
+
+
+
+    # @selected_types = (params[:type_ids].present? ? params[:type_ids] : [])
+
+
+
+    # filtered_ingredients = OriginalIngredient.all(:conditions => {:type_id => params[:type_ids]})
+
+  #   if params[:search_by_type] && params[:search_by_type] != ""
+  #     @ingredients = @ingredients.where("breed like ?", 
+  #     "%# {params[:search_by_breed]}%")
+  #   end
+  #   if params[:search_by_basic] && params[:search_by_basic] != ""
+  #     @kittens = @kittens.where("color like ?", 
+  #     "%# {params[:search_by_basic]}%")
+  #   end
+  #  if params[:search_by_age] && params[:search_by_age] != ""
+  #     @kittens = @kittens.where("age like ?", 
+  #     "%# {params[:search_by_color]}%")
+  #   end
 
     render({ :template => "original_ingredients/index.html.erb" })
   end
+
+def self.search(search)
+
+
+
+end
+
+
+
+
 
   def show
     the_id = params.fetch("path_id")

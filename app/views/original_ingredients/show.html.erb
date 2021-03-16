@@ -18,6 +18,19 @@
       </div>
     </div>
 
+
+<form>
+<h4> Anything you are avoiding?</h4>
+<div>
+<%@list_of_sensitivities.each do |a_sensitivity|%>
+<input id="sensitivity" name="query_sensitivity" type="checkbox" value="<%=a_sensitivity.name%>" />
+<label for="sensitivity"><%=a_sensitivity.name%></label>
+<%end%>
+</div>
+</form>
+
+
+
     <dl>
       <dt>
         Original

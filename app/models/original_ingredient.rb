@@ -3,7 +3,6 @@
 # Table name: original_ingredients
 #
 #  id          :integer          not null, primary key
-#  alternative :string
 #  notes       :text
 #  original    :string
 #  sensitivity :string

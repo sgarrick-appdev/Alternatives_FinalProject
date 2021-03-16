@@ -1,78 +1,39 @@
 <div>
   <div>
     <h1>
-      Ingredients
+      Find an alternative
     </h1>
   </div>
 </div>
 
 <hr>
-
-<div>
+<h3>Search by:</h3>
   <div>
-    <h2>
-      Add a new alternative
-    </h2>
-
-    <form action="/insert_original_ingredient" method="post">
-      <div>
-        <label for="original_box">
-          Original
-        </label>
-
-        <input type="text" id="original_box" name="query_original" placeholder = "">
-      </div>
-
-      <div>
-        <label for="alternative_box">
-          Alternative
-        </label>
-
-        <input type="text" id="alternative_box" name="query_alternative">
-      </div>
-
-      <div>
-        <label for="sensitivity_box">
-          Sensitivity
-        </label>
-
-        <input type="text" id="sensitivity_box" name="query_sensitivity">
-      </div>
-
-      <div>
-        <label for="notes_box">
-          Notes
-        </label>
-
-        <textarea id="notes_box" name="query_notes" rows="3"></textarea>
-      </div>
-
-      <div>
-        <label for="type_id_box">
-          Type
-        </label>
-
-        <input type="text" id="type_id_box" name="query_type_id">
-      </div>
-
-      <button>
-        Create original ingredient
-      </button>
-    </form>
+    <form action="/original_ingredients" method="get">
+    <label for="original_box">What do you need an alternative for?</label>
+    <input type="text" id="original_box" name="query_original" placeholder = "sugar">
   </div>
-</div>
+What type of alternatives are you looking for?
+  <div>
+    <%@list_of_types.each do |a_type|%>
+    <%= check_box_tag("type_ids[]", a_type.id) %>
+    <%=h a_type.name %>
+<% end %>
+  </div>
 
+  <div>
+    <button>Find alternatives!</button>
+  </div>
+</form>
+<%=@show%>
 <hr>
 <div>
   <div>
     <table>
       <tr>
-        <th>
-          ID
-        </th>
 
         <th>
-          Original
+          Basic
         </th>
 
         <th>
@@ -84,60 +45,21 @@
         </th>
 
         <th>
-          Notes
-        </th>
-
-        <th>
           Type
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
         </th>
 
         <th>
         </th>
       </tr>
 
-      <% @list_of_original_ingredients.each do |an_original_ingredient| %>
+      <% @list_of_alternatives.each do |an_ingredient| %>
       <tr>
         <td>
-          <%= an_original_ingredient.id %>
+          <%= an_ingredient.original_ingredient.original %>
         </td>
 
         <td>
-          <%= an_original_ingredient.original %>
-        </td>
-
-        <td>
-          <%= an_original_ingredient.alternative %>
-        </td>
-
-        <td>
-          <%= an_original_ingredient.sensitivity %>
-        </td>
-
-        <td>
-          <%= an_original_ingredient.notes %>
-        </td>
-
-        <td>
-          <%= an_original_ingredient.type_id %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(an_original_ingredient.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(an_original_ingredient.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/original_ingredients/<%= an_original_ingredient.id %>">
+          <a href="/original_ingredients/<%= an_ingredient.original_ingredient_id %>">
             Show details
           </a>
         </td>
