@@ -12,48 +12,41 @@
       </div>
     </div>
 
-
-<form>
-<h4> Anything you are avoiding?</h4>
-<div>
-<%@list_of_sensitivities.each do |a_sensitivity|%>
-<input id="sensitivity" name="query_sensitivity" type="checkbox" value="<%=a_sensitivity.name%>" />
-<label for="sensitivity"><%=a_sensitivity.name%></label>
-<%end%>
-</div>
-</form>
-
+<%if @user_id != nil%>
 <h3>add new alternatives</h3>
-<div>
-    <form action="/insert_alternative" method="post">
-      <div>
-        <input type="hidden" value =" <%=@the_original_ingredient.id%>" name="query_original" placeholder = "sugar">
-      </div>
+  <div>
+      <form action="/insert_alternative" method="post">
+        <input type = "hidden" name = "user_id_query" value = <%=@user_id%>>
+        
+        <div>
+          <input type="hidden" value =" <%=@the_original_ingredient.id%>" name="query_original" placeholder = "sugar">
+        </div>
 
-      <div>
-        <label for="alternative_box">
-          Alternative
-        </label>
-        <input type="text" id="alternative_box" name="query_alternative" placeholder = "stevia">
-      </div>
+        <div>
+          <label for="alternative_box">
+            Alternative
+          </label>
+          <input type="text" id="alternative_box" name="query_alternative" placeholder = "stevia">
+        </div>
 
-      <div>
-        <label for="notes_box">
-          Notes
-        </label>
-        <textarea id="notes_box" name="query_notes" rows="3" placeholder = "e.g. links to recipes, cooking notes, measurement instructions..."></textarea>
-      </div>
+        <div>
+          <label for="notes_box">
+            Notes
+          </label>
+          <textarea id="notes_box" name="query_notes" rows="3" placeholder = "e.g. links to recipes, cooking notes, measurement instructions..."></textarea>
+        </div>
 
-      <div>
-        <input value = "<%=@the_original_ingredient.type_id%>" name="query_type_id" type = "hidden"></input>
-        </select>
-      </div>
+        <div>
+          <input value = "<%=@the_original_ingredient.type_id%>" name="query_type_id" type = "hidden"></input>
+          </select>
+        </div>
 
-      <button>
-        add new alternative
-      </button>
-    </form>
-  </div>
+        <button>
+          add new alternative
+        </button>
+      </form>
+    </div>
+  <%end%>
 
 
 <h3>alternatives</h3>

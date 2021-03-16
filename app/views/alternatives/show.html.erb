@@ -4,6 +4,16 @@
     <%= @alternative_name %> as an alternative for <%=@original_name%>
     </h1>
 
+<hr>
+
+<h3>Notes about using stevia as an alternative</h3>
+<div>
+<%=@the_alternative.notes%>
+</div>
+
+<hr>
+
+<%if @user_id == @the_alternative.user_id%>
     <div>
       <div>
         <a href="/delete_alternative/<%= @the_alternative.id %>">
@@ -11,12 +21,6 @@
         </a>
       </div>
     </div>
-<hr>
-<h3>Notes about using stevia as an alternative</h3>
-<div>
-<%=@the_alternative.notes%>
-</div>
-
 <hr>
 
 
@@ -49,5 +53,7 @@
     </form>
   </div>
 </div>
+
+<%end%>
 
 <hr>

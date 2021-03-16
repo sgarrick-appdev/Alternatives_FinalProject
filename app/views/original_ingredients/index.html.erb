@@ -26,7 +26,9 @@ What type of alternatives are you looking for?
   </div>
 </form>
 <hr>
+<%if @user_id != nil%>
 <h3> Can't find what you are looking for? <a href = "/create_new_alternative">add a new one!</a></h3>
+<%end%>
 <hr>
 <div>
   <div>
@@ -34,23 +36,13 @@ What type of alternatives are you looking for?
       <tr>
 
         <th>
-          Basic
+          Original Ingredient
         </th>
 
         <th>
-          Alternative
+          Alternatives
         </th>
 
-        <th>
-          Sensitivity
-        </th>
-
-        <th>
-          Type
-        </th>
-
-        <th>
-        </th>
       </tr>
 
       <% @list_of_alternatives.each do |an_ingredient| %>
@@ -61,7 +53,7 @@ What type of alternatives are you looking for?
 
         <td>
           <a href="/original_ingredients/<%= an_ingredient.original_ingredient_id %>">
-            Show details
+            Show alternatives
           </a>
         </td>
       </tr>

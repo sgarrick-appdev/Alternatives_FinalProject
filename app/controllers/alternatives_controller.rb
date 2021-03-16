@@ -18,6 +18,7 @@ class AlternativesController < ApplicationController
     @alternative_name = matching_ingredient_alt.original
     matching_ingredient_OG = ingredients.where({:id => original_id}).first
     @original_name = matching_ingredient_OG.original
+    @user_id = session[:user_id]
     render({ :template => "alternatives/show.html.erb" })
   end
 
@@ -30,6 +31,8 @@ class AlternativesController < ApplicationController
     alternative_name = params.fetch("query_alternative")
     original_type = params.fetch("query_type_id")
     notes = params.fetch("query_notes")
+    user_id = params.fetch("user_id_query")
+
     #does the alternative ingredient already exist?
     new_ingredient_alt = OriginalIngredient.new
     new_ingredient_alt.original = alternative_name
@@ -40,6 +43,7 @@ class AlternativesController < ApplicationController
       new_alternative_pair = Alternative.new
       new_alternative_pair.original_ingredient_id = @ingredient_OG.id
       new_alternative_pair.alternative_ingredient_id = new_ingredient_alt.id
+      new_alternative_pair.user_id = user_id
       new_alternative_pair.save
       redirect_to("/original_ingredients/#{new_alternative_pair.original_ingredient_id}", { :notice => "Original ingredient created successfully."})
       end
@@ -49,6 +53,7 @@ class AlternativesController < ApplicationController
       new_alternative_pair = Alternative.new
       new_alternative_pair.original_ingredient_id = @ingredient_OG.id
       new_alternative_pair.alternative_ingredient_id = @ingredient_alt.id
+      new_alternative_pair.user_id = user_id
       new_alternative_pair.save
       redirect_to("/original_ingredients/#{new_alternative_pair.original_ingredient_id}", { :notice => "Original ingredient pair created successfully." })
       else

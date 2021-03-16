@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_16_142936) do
+ActiveRecord::Schema.define(version: 2021_03_16_165444) do
 
   create_table "alternatives", force: :cascade do |t|
     t.integer "original_ingredient_id"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2021_03_16_142936) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "notes"
+    t.integer "user_id"
   end
 
   create_table "food_sensitivities", force: :cascade do |t|

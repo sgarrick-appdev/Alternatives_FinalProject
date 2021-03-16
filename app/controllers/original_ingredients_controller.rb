@@ -4,37 +4,7 @@ class OriginalIngredientsController < ApplicationController
     @list_of_sensitivities = Sensitivity.all
     @list_of_alternatives = Alternative.all
     @ingredients = OriginalIngredient.all
-    
-    # type_id = params.fetch("type_ids")
-
-    # matching_relations = Array.new
-    # type_id.each do |an_id|
-
-    #   matching_ingredients = @ingredients.where(:type_id => an_id)
-    #   matching_relations.push(matching_ingredients)
-    # end
-    
-    # @show = Array.new
-    # matching_relations.each do |a_relation|
-    #   
-    # end
-
-    # @selected_types = (params[:type_ids].present? ? params[:type_ids] : [])
-
-    # filtered_ingredients = OriginalIngredient.all(:conditions => {:type_id => params[:type_ids]})
-
-  #   if params[:search_by_type] && params[:search_by_type] != ""
-  #     @ingredients = @ingredients.where("breed like ?", 
-  #     "%# {params[:search_by_breed]}%")
-  #   end
-  #   if params[:search_by_basic] && params[:search_by_basic] != ""
-  #     @kittens = @kittens.where("color like ?", 
-  #     "%# {params[:search_by_basic]}%")
-  #   end
-  #  if params[:search_by_age] && params[:search_by_age] != ""
-  #     @kittens = @kittens.where("age like ?", 
-  #     "%# {params[:search_by_color]}%")
-  #   end
+    @user_id = session[:user_id]
 
     render({ :template => "original_ingredients/index.html.erb" })
   end
@@ -50,6 +20,9 @@ class OriginalIngredientsController < ApplicationController
     @the_original_ingredient = matching_original_ingredients.at(0)
 
     @matching_alternative_pairs =  @alternatives.where({:original_ingredient_id => the_id})
+
+    @user_id = session[:user_id]
+
     render({ :template => "original_ingredients/show.html.erb" })
   end
 
@@ -58,6 +31,7 @@ class OriginalIngredientsController < ApplicationController
     @list_of_sensitivities = Sensitivity.all
     @list_of_alternatives = Alternative.all
     @ingredients = OriginalIngredient.all
+    @user_id = session[:user_id]
     render({:template => "/alternatives/add_an_alternative.html.erb"})
   end
 
@@ -66,36 +40,38 @@ class OriginalIngredientsController < ApplicationController
     @list_of_sensitivities = Sensitivity.all
     @list_of_alternatives = Alternative.all
     @ingredients = OriginalIngredient.all
+    @user_id = session[:user_id]
     original_name = params.fetch("query_original")
     alternative_name = params.fetch("query_alternative")
     original_type = params.fetch("query_type_id")
+    user_id = params.fetch("user_id_query")
   
-  if @ingredients.where({:original => original_name}).first ==nil
-      new_ingredient_OG = OriginalIngredient.new
-      new_ingredient_OG.original = original_name
-      new_ingredient_OG.type_id = original_type
+    new_ingredient_OG = OriginalIngredient.new
+    new_ingredient_OG.original = original_name.downcase
+    new_ingredient_OG.type_id = original_type
+    if new_ingredient_OG.valid?
       new_ingredient_OG.save
     else
-    @ingredient_OG = @ingredients.where({:original => original_name}).first
+      new_ingredient_OG = @ingredients.where({:original => original_name}).first
     end
 
-    if @ingredients.where({:original => alternative_name}).first ==nil
-      new_ingredient_alt = OriginalIngredient.new
-      new_ingredient_alt.original = alternative_name
-      new_ingredient_alt.type_id = original_type
+    new_ingredient_alt = OriginalIngredient.new
+    new_ingredient_alt.original = alternative_name.downcase
+    new_ingredient_alt.type_id = original_type
+    if new_ingredient_alt.valid?
       new_ingredient_alt.save
     else
-      @ingredient_alt = @ingredients.where({:original => alternative_name}).first
+      new_ingredient_alt = @ingredients.where({:original => alternative_name}).first
     end
-
-  if @list_of_alternatives.where({:original_ingredient_id => @ingredient_OG.id, :alternative_ingredient_id => @ingredient_alt.id}).first == nil
+    if @list_of_alternatives.where({:alternative_ingredient_id =>new_ingredient_alt.id,:original_ingredient_id =>new_ingredient_OG.id }).first==nil
       new_alternative_pair = Alternative.new
-      new_alternative_pair.original_ingredient_id = @ingredient_OG.id
-      new_alternative_pair.alternative_ingredient_id = @ingredient_alt.id
+      new_alternative_pair.original_ingredient_id = new_ingredient_OG.id
+      new_alternative_pair.alternative_ingredient_id = new_ingredient_alt.id
+      new_alternative_pair.user_id = user_id
       new_alternative_pair.save
-      redirect_to("/original_ingredients/#{new_alternative_pair.original_ingredient_id}", { :notice => "Original ingredient created successfully." })
-  else
-    redirect_to("/original_ingredients/#{@ingredient_OG.id}", { :alert => "Original ingredient already exists."})
+      redirect_to("/original_ingredients/#{new_alternative_pair.original_ingredient_id}", { :notice => "Alternative pair created successfully." })
+    else
+    redirect_to("/original_ingredients/#{new_ingredient_OG.id}", { :alert => "Alternative pair already exists."})
   end
 
   end
