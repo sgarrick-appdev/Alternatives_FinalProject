@@ -52,7 +52,7 @@ class OriginalIngredientsController < ApplicationController
     if new_ingredient_OG.valid?
       new_ingredient_OG.save
     else
-      new_ingredient_OG = @ingredients.where({:original => original_name}).first
+      new_ingredient_OG = @ingredients.where({:original => original_name.downcase}).first
     end
 
     new_ingredient_alt = OriginalIngredient.new
@@ -76,30 +76,30 @@ class OriginalIngredientsController < ApplicationController
 
   end
 
-  def update
-    the_id = params.fetch("path_id")
-    the_original_ingredient = OriginalIngredient.where({ :id => the_id }).at(0)
+  # def update
+  #   the_id = params.fetch("path_id")
+  #   the_original_ingredient = OriginalIngredient.where({ :id => the_id }).at(0)
 
-    the_original_ingredient.original = params.fetch("query_original")
-    the_original_ingredient.alternative = params.fetch("query_alternative")
-    the_original_ingredient.sensitivity = params.fetch("query_sensitivity")
-    the_original_ingredient.notes = params.fetch("query_notes")
-    the_original_ingredient.type_id = params.fetch("query_type_id")
+  #   the_original_ingredient.original = params.fetch("query_original")
+  #   the_original_ingredient.alternative = params.fetch("query_alternative")
+  #   the_original_ingredient.sensitivity = params.fetch("query_sensitivity")
+  #   the_original_ingredient.notes = params.fetch("query_notes")
+  #   the_original_ingredient.type_id = params.fetch("query_type_id")
 
-    if the_original_ingredient.valid?
-      the_original_ingredient.save
-      redirect_to("/original_ingredients/#{the_original_ingredient.id}", { :notice => "Original ingredient updated successfully."} )
-    else
-      redirect_to("/original_ingredients/#{the_original_ingredient.id}", { :alert => "Original ingredient failed to update successfully." })
-    end
-  end
+  #   if the_original_ingredient.valid?
+  #     the_original_ingredient.save
+  #     redirect_to("/original_ingredients/#{the_original_ingredient.id}", { :notice => "Original ingredient updated successfully."} )
+  #   else
+  #     redirect_to("/original_ingredients/#{the_original_ingredient.id}", { :alert => "Original ingredient failed to update successfully." })
+  #   end
+  # end
 
-  def destroy
-    the_id = params.fetch("path_id")
-    the_original_ingredient = OriginalIngredient.where({ :id => the_id }).at(0)
+  # def destroy
+  #   the_id = params.fetch("path_id")
+  #   the_original_ingredient = OriginalIngredient.where({ :id => the_id }).at(0)
 
-    the_original_ingredient.destroy
+  #   the_original_ingredient.destroy
 
-    redirect_to("/original_ingredients", { :notice => "Original ingredient deleted successfully."} )
-  end
+  #   redirect_to("/original_ingredients", { :notice => "Original ingredient deleted successfully."} )
+  # end
 end

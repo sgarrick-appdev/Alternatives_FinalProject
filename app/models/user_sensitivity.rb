@@ -9,7 +9,7 @@
 #  user_id        :integer
 #
 class UserSensitivity < ApplicationRecord
-  belongs_to(:user, { :required => false, :class_name => "User", :foreign_key => "user_id" })
-  belongs_to(:sensitivity, { :required => false, :class_name => "Sensitivity", :foreign_key => "sensitivity_id" })
+  # belongs_to(:user, { :required => false, :class_name => "User", :foreign_key => "user_id" })
+  # belongs_to(:sensitivity, { :required => false, :class_name => "Sensitivity", :foreign_key => "sensitivity_id" })
   
 end

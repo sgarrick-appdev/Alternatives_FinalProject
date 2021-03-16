@@ -5,17 +5,17 @@ Rails.application.routes.draw do
   # CREATE
   post("/insert_comment", { :controller => "comments", :action => "create" })
           
-  # READ
-  get("/comments", { :controller => "comments", :action => "index" })
+  # # READ
+  # get("/comments", { :controller => "comments", :action => "index" })
   
-  get("/comments/:path_id", { :controller => "comments", :action => "show" })
+  # get("/comments/:path_id", { :controller => "comments", :action => "show" })
   
-  # UPDATE
+  # # UPDATE
   
-  post("/modify_comment/:path_id", { :controller => "comments", :action => "update" })
+  # post("/modify_comment/:path_id", { :controller => "comments", :action => "update" })
   
-  # DELETE
-  get("/delete_comment/:path_id", { :controller => "comments", :action => "destroy" })
+  # # DELETE
+  # get("/delete_comment/:path_id", { :controller => "comments", :action => "destroy" })
 
   #------------------------------
 
@@ -27,52 +27,33 @@ Rails.application.routes.draw do
   # READ
   get("/favorites", { :controller => "favorites", :action => "index" })
   
-  get("/favorites/:path_id", { :controller => "favorites", :action => "show" })
+  # get("/favorites/:path_id", { :controller => "favorites", :action => "show" })
   
-  # UPDATE
+  # # UPDATE
   
-  post("/modify_favorite/:path_id", { :controller => "favorites", :action => "update" })
+  # post("/modify_favorite/:path_id", { :controller => "favorites", :action => "update" })
   
   # DELETE
   get("/delete_favorite/:path_id", { :controller => "favorites", :action => "destroy" })
 
   #------------------------------
 
-  # Routes for the Like resource:
+  # # Routes for the User sensitivity resource:
 
-  # CREATE
-  post("/insert_like", { :controller => "likes", :action => "create" })
+  # # CREATE
+  # post("/insert_user_sensitivity", { :controller => "user_sensitivities", :action => "create" })
           
-  # READ
-  get("/likes", { :controller => "likes", :action => "index" })
+  # # READ
+  # get("/user_sensitivities", { :controller => "user_sensitivities", :action => "index" })
   
-  get("/likes/:path_id", { :controller => "likes", :action => "show" })
+  # get("/user_sensitivities/:path_id", { :controller => "user_sensitivities", :action => "show" })
   
-  # UPDATE
+  # # UPDATE
   
-  post("/modify_like/:path_id", { :controller => "likes", :action => "update" })
+  # post("/modify_user_sensitivity/:path_id", { :controller => "user_sensitivities", :action => "update" })
   
-  # DELETE
-  get("/delete_like/:path_id", { :controller => "likes", :action => "destroy" })
-
-  #------------------------------
-
-  # Routes for the User sensitivity resource:
-
-  # CREATE
-  post("/insert_user_sensitivity", { :controller => "user_sensitivities", :action => "create" })
-          
-  # READ
-  get("/user_sensitivities", { :controller => "user_sensitivities", :action => "index" })
-  
-  get("/user_sensitivities/:path_id", { :controller => "user_sensitivities", :action => "show" })
-  
-  # UPDATE
-  
-  post("/modify_user_sensitivity/:path_id", { :controller => "user_sensitivities", :action => "update" })
-  
-  # DELETE
-  get("/delete_user_sensitivity/:path_id", { :controller => "user_sensitivities", :action => "destroy" })
+  # # DELETE
+  # get("/delete_user_sensitivity/:path_id", { :controller => "user_sensitivities", :action => "destroy" })
 
   #------------------------------
 
@@ -129,7 +110,7 @@ Rails.application.routes.draw do
   
   # UPDATE
   
-  post("/modify_alternative/:path_id", { :controller => "alternatives", :action => "update" })
+  # post("/modify_alternative/:path_id", { :controller => "alternatives", :action => "update" })
   
   # DELETE
   get("/delete_alternative/:path_id", { :controller => "alternatives", :action => "destroy" })
@@ -138,20 +119,20 @@ Rails.application.routes.draw do
 
   # Routes for the Type resource:
 
-  # CREATE
-  post("/insert_type", { :controller => "types", :action => "create" })
+  # # CREATE
+  # post("/insert_type", { :controller => "types", :action => "create" })
           
-  # READ
-  get("/types", { :controller => "types", :action => "index" })
+  # # READ
+  # get("/types", { :controller => "types", :action => "index" })
   
-  get("/types/:path_id", { :controller => "types", :action => "show" })
+  # get("/types/:path_id", { :controller => "types", :action => "show" })
   
-  # UPDATE
+  # # UPDATE
   
-  post("/modify_type/:path_id", { :controller => "types", :action => "update" })
+  # post("/modify_type/:path_id", { :controller => "types", :action => "update" })
   
-  # DELETE
-  get("/delete_type/:path_id", { :controller => "types", :action => "destroy" })
+  # # DELETE
+  # get("/delete_type/:path_id", { :controller => "types", :action => "destroy" })
 
   #------------------------------
 
@@ -166,12 +147,12 @@ Rails.application.routes.draw do
   
   get("/original_ingredients/:path_id", { :controller => "original_ingredients", :action => "show" })
   
-  # UPDATE
+  # # UPDATE
   
-  post("/modify_original_ingredient/:path_id", { :controller => "original_ingredients", :action => "update" })
+  # post("/modify_original_ingredient/:path_id", { :controller => "original_ingredients", :action => "update" })
   
-  # DELETE
-  get("/delete_original_ingredient/:path_id", { :controller => "original_ingredients", :action => "destroy" })
+  # # DELETE
+  # get("/delete_original_ingredient/:path_id", { :controller => "original_ingredients", :action => "destroy" })
 
   #------------------------------
 
@@ -181,7 +162,7 @@ Rails.application.routes.draw do
   get("/user_sign_up", { :controller => "user_authentication", :action => "sign_up_form" })        
   # CREATE RECORD
   post("/insert_user", { :controller => "user_authentication", :action => "create"  })
-      
+  
   # EDIT PROFILE FORM        
   get("/edit_user_profile", { :controller => "user_authentication", :action => "edit_profile_form" })       
   # UPDATE RECORD

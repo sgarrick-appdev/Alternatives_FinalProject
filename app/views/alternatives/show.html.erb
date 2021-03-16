@@ -55,42 +55,12 @@ Comment
     <div>
       <div>
         <a href="/delete_alternative/<%= @the_alternative.id %>">
-          Delete alternative
+          <button>Delete alternative</button>
         </a>
       </div>
     </div>
+
 <hr>
-
-
-<div>
-  <div>
-    <h2>
-      Edit alternative
-    </h2>
-
-    <form action="/modify_alternative/<%= @the_alternative.id %>"  method="post" >
-      <div>
-        <label for="original_ingredient_id_box">
-          Original ingredient
-        </label>
-
-        <input type="text" id="original_ingredient_id_box" name="query_original_ingredient_id" value="<%= @the_alternative.original_ingredient_id %>">
-      </div>
-
-      <div>
-        <label for="alternative_ingredient_id_box">
-          Alternative ingredient
-        </label>
-
-        <input type="text" id="alternative_ingredient_id_box" name="query_alternative_ingredient_id" value="<%= @the_alternative.alternative_ingredient_id %>">
-      </div>
-
-      <button>
-        Update alternative
-      </button>
-    </form>
-  </div>
-</div>
 
 <%elsif @user_id != @the_alternative.user_id%>
 <div>
@@ -104,4 +74,3 @@ Add a comment!
 </div>
 <%end%>
 <%end%>
-<hr>

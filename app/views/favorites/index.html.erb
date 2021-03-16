@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      List of all favorites
+      <%=@this_user.username%>'s Favorites
     </h1>
   </div>
 </div>
@@ -25,7 +25,7 @@
 
       </tr>
 
-      <% @list_of_favorites.each do |a_favorite| %>
+      <% @user_faves.each do |a_favorite| %>
       <tr>
         <td>
          <%= a_favorite.alternative.original_ingredient.original %>
