@@ -1,53 +1,20 @@
 <div>
   <div>
     <h1>
-      Alternative #<%= @the_alternative.id %> details
+    <%= @alternative_name %> as an alternative for <%=@original_name%>
     </h1>
 
     <div>
-      <div>
-        <a href="/alternatives">
-          Go back
-        </a>
-      </div>
-
       <div>
         <a href="/delete_alternative/<%= @the_alternative.id %>">
           Delete alternative
         </a>
       </div>
     </div>
-
-    <dl>
-      <dt>
-        Original ingredient
-      </dt>
-      <dd>
-        <%= @the_alternative.original_ingredient_id %>
-      </dd>
-
-      <dt>
-        Alternative ingredient
-      </dt>
-      <dd>
-        <%= @the_alternative.alternative_ingredient_id %>
-      </dd>
-
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_alternative.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_alternative.updated_at) %> ago
-      </dd>
-    </dl>
-  </div>
+<hr>
+<h3>Notes about using stevia as an alternative</h3>
+<div>
+<%=@the_alternative.notes%>
 </div>
 
 <hr>

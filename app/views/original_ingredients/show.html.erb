@@ -1,19 +1,13 @@
 <div>
   <div>
     <h1>
-      Original ingredient #<%= @the_original_ingredient.id %> details
+      alternatives for <%= @the_original_ingredient.original %>
     </h1>
 
     <div>
       <div>
         <a href="/original_ingredients">
           Go back
-        </a>
-      </div>
-
-      <div>
-        <a href="/delete_original_ingredient/<%= @the_original_ingredient.id %>">
-          Delete original ingredient
         </a>
       </div>
     </div>
@@ -29,115 +23,56 @@
 </div>
 </form>
 
-
-
-    <dl>
-      <dt>
-        Original
-      </dt>
-      <dd>
-        <%= @the_original_ingredient.original %>
-      </dd>
-
-      <dt>
-        Alternative
-      </dt>
-      <dd>
-        <%= @the_original_ingredient.alternative %>
-      </dd>
-
-      <dt>
-        Sensitivity
-      </dt>
-      <dd>
-        <%= @the_original_ingredient.sensitivity %>
-      </dd>
-
-      <dt>
-        Notes
-      </dt>
-      <dd>
-        <%= @the_original_ingredient.notes %>
-      </dd>
-
-      <dt>
-        Type
-      </dt>
-      <dd>
-        <%= @the_original_ingredient.type_id %>
-      </dd>
-
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_original_ingredient.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_original_ingredient.updated_at) %> ago
-      </dd>
-    </dl>
-  </div>
-</div>
-
-<hr>
-
-
+<h3>add new alternatives</h3>
 <div>
-  <div>
-    <h2>
-      Edit original ingredient
-    </h2>
-
-    <form action="/modify_original_ingredient/<%= @the_original_ingredient.id %>"  method="post" >
+    <form action="/insert_alternative" method="post">
       <div>
-        <label for="original_box">
-          Original
-        </label>
-
-        <input type="text" id="original_box" name="query_original" value="<%= @the_original_ingredient.original %>">
+        <input type="hidden" value =" <%=@the_original_ingredient.id%>" name="query_original" placeholder = "sugar">
       </div>
 
       <div>
         <label for="alternative_box">
           Alternative
         </label>
-
-        <input type="text" id="alternative_box" name="query_alternative" value="<%= @the_original_ingredient.alternative %>">
-      </div>
-
-      <div>
-        <label for="sensitivity_box">
-          Sensitivity
-        </label>
-
-        <input type="text" id="sensitivity_box" name="query_sensitivity" value="<%= @the_original_ingredient.sensitivity %>">
+        <input type="text" id="alternative_box" name="query_alternative" placeholder = "stevia">
       </div>
 
       <div>
         <label for="notes_box">
           Notes
         </label>
-
-        <textarea id="notes_box" name="query_notes"><%= @the_original_ingredient.notes %></textarea>
+        <textarea id="notes_box" name="query_notes" rows="3" placeholder = "e.g. links to recipes, cooking notes, measurement instructions..."></textarea>
       </div>
 
       <div>
-        <label for="type_id_box">
-          Type
-        </label>
-
-        <input type="text" id="type_id_box" name="query_type_id" value="<%= @the_original_ingredient.type_id %>">
+        <input value = "<%=@the_original_ingredient.type_id%>" name="query_type_id" type = "hidden"></input>
+        </select>
       </div>
 
       <button>
-        Update original ingredient
+        add new alternative
       </button>
     </form>
+  </div>
+
+
+<h3>alternatives</h3>
+
+<%@matching_alternative_pairs.each do |an_alternative_pair|%>
+
+<dl>
+      <dt>
+        <% @alt_id = an_alternative_pair.alternative_ingredient_id%>
+        <%= @ingredients.where(:id => @alt_id).first.original%>
+      </dt>
+      <dd>
+        <a href = '/alternatives/<%=an_alternative_pair.id%>'>details about this alternative</a>
+      </dd>
+
+    </dl>
+
+<%end%>
+    
   </div>
 </div>
 

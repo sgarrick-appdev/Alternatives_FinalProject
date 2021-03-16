@@ -12,4 +12,6 @@
 #
 class OriginalIngredient < ApplicationRecord
   belongs_to(:type, { :required => false, :class_name => "Type", :foreign_key => "type_id" })
+  validates(:original, { :uniqueness => true })
+  has_many(:food_sensitivities, { :class_name => "FoodSensitivity", :foreign_key => "ingredient_id", :dependent => :destroy })
 end

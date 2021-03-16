@@ -16,7 +16,7 @@ class OriginalIngredientsController < ApplicationController
     
     # @show = Array.new
     # matching_relations.each do |a_relation|
-    #   @show.push(a_relation.)
+    #   
     # end
 
     # @selected_types = (params[:type_ids].present? ? params[:type_ids] : [])
@@ -40,11 +40,16 @@ class OriginalIngredientsController < ApplicationController
   end
 
   def show
+    @list_of_types = Type.all
+    @list_of_sensitivities = Sensitivity.all
+    @alternatives = Alternative.all
+    @ingredients = OriginalIngredient.all
+
     the_id = params.fetch("path_id")
-
     matching_original_ingredients = OriginalIngredient.where({ :id => the_id })
-
     @the_original_ingredient = matching_original_ingredients.at(0)
+
+    @matching_alternative_pairs =  @alternatives.where({:original_ingredient_id => the_id})
     render({ :template => "original_ingredients/show.html.erb" })
   end
 
@@ -56,7 +61,6 @@ class OriginalIngredientsController < ApplicationController
     render({:template => "/alternatives/add_an_alternative.html.erb"})
   end
 
-
   def create
     @list_of_types = Type.all
     @list_of_sensitivities = Sensitivity.all
@@ -66,28 +70,33 @@ class OriginalIngredientsController < ApplicationController
     alternative_name = params.fetch("query_alternative")
     original_type = params.fetch("query_type_id")
   
-    new_alternative_pair = Alternative.new
-    if @ingredients.where(:original => original_name).first ==nil
+  if @ingredients.where({:original => original_name}).first ==nil
       new_ingredient_OG = OriginalIngredient.new
       new_ingredient_OG.original = original_name
       new_ingredient_OG.type_id = original_type
       new_ingredient_OG.save
     else
-      ingredient_OG = @ingredients.where(:original => original_name).first
-      new_alternative_pair.original_ingredient_id = ingredient_OG.id
+    @ingredient_OG = @ingredients.where({:original => original_name}).first
     end
 
-    if @ingredients.where(:original => alternative_name).first ==nil
+    if @ingredients.where({:original => alternative_name}).first ==nil
       new_ingredient_alt = OriginalIngredient.new
       new_ingredient_alt.original = alternative_name
       new_ingredient_alt.type_id = original_type
       new_ingredient_alt.save
-    redirect_to("/original_ingredients/", { :notice => "Original ingredient created successfully." })
     else
-      ingredient_alt = @ingredients.where(:original => alternative_name).first
-      new_alternative_pair.alternative_ingredient_id = iingredient_alt.id
-      redirect_to("/original_ingredients/", { :notice => "Original ingredient created successfully." })
+      @ingredient_alt = @ingredients.where({:original => alternative_name}).first
     end
+
+  if @list_of_alternatives.where({:original_ingredient_id => @ingredient_OG.id, :alternative_ingredient_id => @ingredient_alt.id}).first == nil
+      new_alternative_pair = Alternative.new
+      new_alternative_pair.original_ingredient_id = @ingredient_OG.id
+      new_alternative_pair.alternative_ingredient_id = @ingredient_alt.id
+      new_alternative_pair.save
+      redirect_to("/original_ingredients/#{new_alternative_pair.original_ingredient_id}", { :notice => "Original ingredient created successfully." })
+  else
+    redirect_to("/original_ingredients/#{@ingredient_OG.id}", { :alert => "Original ingredient already exists."})
+  end
 
   end
 
