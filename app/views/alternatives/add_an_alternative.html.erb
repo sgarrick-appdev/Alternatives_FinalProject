@@ -1,0 +1,49 @@
+<div>
+  <div>
+    <h2>
+      Add a new alternative
+    </h2>
+
+    <form action="/insert_original_ingredient" method="post">
+      <div>
+        <label for="original_box">
+          Basic
+        </label>
+
+        <input type="text" id="original_box" name="query_original" placeholder = "sugar">
+      </div>
+
+      <div>
+        <label for="alternative_box">
+          Alternative
+        </label>
+
+        <input type="text" id="alternative_box" name="query_alternative" placeholder = "stevia">
+      </div>
+
+
+      <div>
+        <label for="notes_box">
+          Notes
+        </label>
+
+        <textarea id="notes_box" name="query_notes" rows="3" placeholder = "e.g. links to recipes, cooking notes, measurement instructions..."></textarea>
+      </div>
+
+      <div>
+        <label for="type_id_box">
+          Type
+        </label>
+         <select id="type_id_box" name="query_type_id">
+          <%@list_of_types.each do |a_type|%>
+        <option value = "<%=a_type.id%>"><%=a_type.name%></option>
+        <%end%>
+        </select>
+      </div>
+
+      <button>
+        Create original ingredient
+      </button>
+    </form>
+  </div>
+</div>

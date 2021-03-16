@@ -5,27 +5,21 @@ class OriginalIngredientsController < ApplicationController
     @list_of_alternatives = Alternative.all
     @ingredients = OriginalIngredient.all
     
+    # type_id = params.fetch("type_ids")
+
+    # matching_relations = Array.new
+    # type_id.each do |an_id|
+
+    #   matching_ingredients = @ingredients.where(:type_id => an_id)
+    #   matching_relations.push(matching_ingredients)
+    # end
     
-    type_id = params.fetch("type_ids")
-
-    matching_relations = Array.new
-    type_id.each do |an_id|
-
-      matching_ingredients = @ingredients.where(:type_id => an_id)
-      matching_relations.push(matching_ingredients)
-    end
-    
-    @show = Array.new
-    matching_relations.each do |a_relation|
-      @show.push(a_relation.)
-    end
-
-
-
+    # @show = Array.new
+    # matching_relations.each do |a_relation|
+    #   @show.push(a_relation.)
+    # end
 
     # @selected_types = (params[:type_ids].present? ? params[:type_ids] : [])
-
-
 
     # filtered_ingredients = OriginalIngredient.all(:conditions => {:type_id => params[:type_ids]})
 
@@ -45,40 +39,56 @@ class OriginalIngredientsController < ApplicationController
     render({ :template => "original_ingredients/index.html.erb" })
   end
 
-def self.search(search)
-
-
-
-end
-
-
-
-
-
   def show
     the_id = params.fetch("path_id")
 
     matching_original_ingredients = OriginalIngredient.where({ :id => the_id })
 
     @the_original_ingredient = matching_original_ingredients.at(0)
-
     render({ :template => "original_ingredients/show.html.erb" })
   end
 
-  def create
-    the_original_ingredient = OriginalIngredient.new
-    the_original_ingredient.original = params.fetch("query_original")
-    the_original_ingredient.alternative = params.fetch("query_alternative")
-    the_original_ingredient.sensitivity = params.fetch("query_sensitivity")
-    the_original_ingredient.notes = params.fetch("query_notes")
-    the_original_ingredient.type_id = params.fetch("query_type_id")
+  def create_page
+    @list_of_types = Type.all
+    @list_of_sensitivities = Sensitivity.all
+    @list_of_alternatives = Alternative.all
+    @ingredients = OriginalIngredient.all
+    render({:template => "/alternatives/add_an_alternative.html.erb"})
+  end
 
-    if the_original_ingredient.valid?
-      the_original_ingredient.save
-      redirect_to("/original_ingredients", { :notice => "Original ingredient created successfully." })
+
+  def create
+    @list_of_types = Type.all
+    @list_of_sensitivities = Sensitivity.all
+    @list_of_alternatives = Alternative.all
+    @ingredients = OriginalIngredient.all
+    original_name = params.fetch("query_original")
+    alternative_name = params.fetch("query_alternative")
+    original_type = params.fetch("query_type_id")
+  
+    new_alternative_pair = Alternative.new
+    if @ingredients.where(:original => original_name).first ==nil
+      new_ingredient_OG = OriginalIngredient.new
+      new_ingredient_OG.original = original_name
+      new_ingredient_OG.type_id = original_type
+      new_ingredient_OG.save
     else
-      redirect_to("/original_ingredients", { :notice => "Original ingredient failed to create successfully." })
+      ingredient_OG = @ingredients.where(:original => original_name).first
+      new_alternative_pair.original_ingredient_id = ingredient_OG.id
     end
+
+    if @ingredients.where(:original => alternative_name).first ==nil
+      new_ingredient_alt = OriginalIngredient.new
+      new_ingredient_alt.original = alternative_name
+      new_ingredient_alt.type_id = original_type
+      new_ingredient_alt.save
+    redirect_to("/original_ingredients/", { :notice => "Original ingredient created successfully." })
+    else
+      ingredient_alt = @ingredients.where(:original => alternative_name).first
+      new_alternative_pair.alternative_ingredient_id = iingredient_alt.id
+      redirect_to("/original_ingredients/", { :notice => "Original ingredient created successfully." })
+    end
+
   end
 
   def update

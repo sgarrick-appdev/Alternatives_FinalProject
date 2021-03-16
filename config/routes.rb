@@ -101,7 +101,7 @@ Rails.application.routes.draw do
   # Routes for the Original ingredient resource:
 
   # CREATE
-  get("/create_new_original_ingredient", {:controller => "original_ingredients", :action => "add_page"})
+  get("/create_new_alternative", {:controller => "original_ingredients", :action => "create_page"})
   post("/insert_original_ingredient", { :controller => "original_ingredients", :action => "create" })
           
   # READ

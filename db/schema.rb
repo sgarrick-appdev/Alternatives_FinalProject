@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_15_214507) do
+ActiveRecord::Schema.define(version: 2021_03_16_142936) do
 
   create_table "alternatives", force: :cascade do |t|
     t.integer "original_ingredient_id"
@@ -30,11 +30,11 @@ ActiveRecord::Schema.define(version: 2021_03_15_214507) do
 
   create_table "original_ingredients", force: :cascade do |t|
     t.string "original"
-    t.string "sensitivity"
     t.text "notes"
     t.integer "type_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "sensitivity_id"
   end
 
   create_table "sensitivities", force: :cascade do |t|
