@@ -20,4 +20,7 @@ class Alternative < ApplicationRecord
   has_many(:likes, { :class_name => "Like", :foreign_key => "alternative_id", :dependent => :destroy })
 
   has_many(:favorites, { :class_name => "Favorite", :foreign_key => "alternative_id", :dependent => :destroy })
+
+  has_many(:comments, { :class_name => "Comment", :foreign_key => "ingredient_id", :dependent => :destroy })
+
 end

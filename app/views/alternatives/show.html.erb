@@ -6,13 +6,46 @@
 
 <hr>
 
+<%if @user_id != nil%>
+
+<form action = "/insert_favorite" method = "post">
+<input type = "hidden" name = "query_user" value = "<%=@user_id%>">
+<input type = "hidden" name = "query_alt" value = "<%=@the_alternative.id%>">
+<button>Favorite this alternative pair</button>
+</form>
+
+<%end%>
+<hr>
+
 <h3>Notes about using stevia as an alternative</h3>
 <div>
 <%=@the_alternative.notes%>
 </div>
-
 <hr>
+<h3>Comments about this alternative</h3>
+<%@matching_comments.each do |a_comment|%>
+<table>
+<tr>
+<th>
+Username
+</th>
+<th>
+Comment
+</th>
+</tr>
+<tr>
+<td>
+<%=a_comment.commenter.username%>
+</td>
+<td>
+<%=a_comment.body%>
+</td>
+</tr>
 
+</table>
+<%end%>
+<hr>
+<%if @user_id!= nil%>
 <%if @user_id == @the_alternative.user_id%>
     <div>
       <div>
@@ -54,6 +87,16 @@
   </div>
 </div>
 
+<%elsif @user_id != @the_alternative.user_id%>
+<div>
+<form action = "/insert_comment" method = "post">
+Add a comment!
+<input type = "hidden" name = "user_query_id" value = "<%=@user_id%>" >
+<input type = "hidden" name = "alt_query_id" value = "<%= @the_alternative.id%>" >
+<textarea name="query_comment" rows="3"></textarea>
+<button>comment</button>
+</form>
+</div>
 <%end%>
-
+<%end%>
 <hr>

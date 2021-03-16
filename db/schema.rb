@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_16_165444) do
+ActiveRecord::Schema.define(version: 2021_03_16_174736) do
 
   create_table "alternatives", force: :cascade do |t|
     t.integer "original_ingredient_id"
@@ -21,10 +21,35 @@ ActiveRecord::Schema.define(version: 2021_03_16_165444) do
     t.integer "user_id"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.text "body"
+    t.integer "commenter_id"
+    t.integer "ingredient_id"
+    t.integer "measurement_id"
+    t.integer "dietary_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "alternative_id"
+    t.integer "dietary_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "food_sensitivities", force: :cascade do |t|
     t.integer "ingredient_id"
     t.integer "sensitivity_id"
     t.integer "dietary_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "alternative_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

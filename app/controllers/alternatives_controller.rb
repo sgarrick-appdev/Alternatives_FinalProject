@@ -19,6 +19,8 @@ class AlternativesController < ApplicationController
     matching_ingredient_OG = ingredients.where({:id => original_id}).first
     @original_name = matching_ingredient_OG.original
     @user_id = session[:user_id]
+    @matching_comments = Comment.all.where({:ingredient_id => the_id})
+
     render({ :template => "alternatives/show.html.erb" })
   end
 
@@ -35,7 +37,7 @@ class AlternativesController < ApplicationController
 
     #does the alternative ingredient already exist?
     new_ingredient_alt = OriginalIngredient.new
-    new_ingredient_alt.original = alternative_name
+    new_ingredient_alt.original = alternative_name.downcase
     new_ingredient_alt.type_id = original_type
     if new_ingredient_alt.valid? #if it doesn't already exist, make a new alternative pair
       new_ingredient_alt.save
