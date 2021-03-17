@@ -28,8 +28,6 @@ class OriginalIngredientsController < ApplicationController
 
     @matching_alternative_pairs =  @alternatives.where({:original_ingredient_id => the_id})
     @user_id = session[:user_id]
-    
-    
     render({ :template => "original_ingredients/show.html.erb" })
   end
 
