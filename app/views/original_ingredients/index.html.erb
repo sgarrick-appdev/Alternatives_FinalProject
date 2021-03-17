@@ -32,29 +32,12 @@
   <a href="/original_ingredients">Clear filters</a>
 
 <% end %>
-
-
 <hr>
-<%if @user_id != nil%>
-<h3> Can't find what you are looking for? <a href = "/create_new_alternative">add a new one!</a></h3>
-<%end%>
-<hr>
-
 <%if @check_presence == nil%>
 No results!
 <%else%>
 <div>
   <table>
-      <tr>
-        <th>
-          Original Ingredient
-        </th>
-
-        <th>
-          Alternatives
-        </th>
-
-      </tr>
    <% @matching_ingredients.each do |an_ingredient| %>
    <%if @list_of_alternatives.where({:original_ingredient_id => an_ingredient.id}).first!= nil%>
       <tr>
@@ -73,3 +56,9 @@ No results!
     </table>
   </div>
  <% end %>
+
+ <hr>
+<%if @user_id != nil%>
+<h3> Can't find what you are looking for? <a href = "/create_new_alternative">add a new one!</a></h3>
+<%end%>
+<hr>

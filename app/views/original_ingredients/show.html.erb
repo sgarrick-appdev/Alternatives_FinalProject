@@ -58,11 +58,11 @@
         <% @alt_id = an_alternative_pair.alternative_ingredient_id%>
         <%= @ingredients.where(:id => @alt_id).first.original%>
       </dt>
-      <dd>
+      <dt>
         <a href = '/alternatives/<%=an_alternative_pair.id%>'>details about this alternative</a>
-      </dd>
+      </dt>
 
-    </dl>
+  </dl>
 
 <%end%>
     
