@@ -1,17 +1,17 @@
-<h1>Sign in</h1>
+<h2 class = "offset-md-1 py-6">Sign in</h2>
 
-<form action="/user_verify_credentials" method="post">
-  <div>
+<form action="/user_verify_credentials" method="post" class = "col-md-4 offset-md-1">
+  <div class="form-group">
     <label for="email_box">Email</label>
-    <input id="email_box" name="query_email" placeholder="Enter your email..." type="text">
+    <input class="form-control" id="email_box" name="query_email" placeholder="Enter email" type="text">
   </div>
 
-  <div>
+  <div class="form-group">
     <label for="password_box">Password</label>
-    <input id="password_box" name="query_password" placeholder="Enter your password..." type="password">
+    <input class="form-control" id="password_box" name="query_password" placeholder="Enter your password..." type="password">
   </div>
 
-  <button>
+  <button class="btn btn-danger">
     Sign in
   </button>
 </form>
