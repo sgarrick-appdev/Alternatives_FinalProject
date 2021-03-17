@@ -54,7 +54,6 @@ Comment
 </table>
 <%end%>
 <hr>
-<%if @user_id!= nil%>
 <%if @user_id == @the_alternative.user_id%>
     <div>
       <div>
@@ -63,10 +62,9 @@ Comment
         </a>
       </div>
     </div>
-
 <hr>
-
-<%elsif @user_id != @the_alternative.user_id%>
+<%end%>
+<%if @user_id!= nil%>
 <div>
 <form action = "/insert_comment" method = "post">
 Add a comment!
@@ -77,4 +75,4 @@ Add a comment!
 </form>
 </div>
 <%end%>
-<%end%>
+

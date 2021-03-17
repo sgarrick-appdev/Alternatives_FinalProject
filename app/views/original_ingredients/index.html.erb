@@ -25,26 +25,23 @@
   <% end %>
 </div>
 
-
-
-
   <%= f.submit :class => "btn btn-primary btn-block" %>
   <a href="/original_ingredients">Clear filters</a>
-
 <% end %>
 <hr>
+
 <%if @check_presence == nil%>
-No results!
+No results! Add your <a href = /create_new_alternative">own</a> or try again.
 <%else%>
 <div>
   <table>
+  <%unless params[:q].blank?%>
    <% @matching_ingredients.each do |an_ingredient| %>
    <%if @list_of_alternatives.where({:original_ingredient_id => an_ingredient.id}).first!= nil%>
       <tr>
         <td>
           <%= an_ingredient.original %>
         </td>
-
         <td>
           <a href="/original_ingredients/<%= an_ingredient.id %>">
             Show alternatives
@@ -55,6 +52,7 @@ No results!
     <%end%>
     </table>
   </div>
+  <%end%>
  <% end %>
 
  <hr>

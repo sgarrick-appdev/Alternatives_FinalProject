@@ -83,21 +83,6 @@ class AlternativesController < ApplicationController
     end
   end
 
-  # def update
-  #   the_id = params.fetch("path_id")
-  #   the_alternative = Alternative.where({ :id => the_id }).at(0)
-
-  #   the_alternative.original_ingredient_id = params.fetch("query_original_ingredient_id")
-  #   the_alternative.alternative_ingredient_id = params.fetch("query_alternative_ingredient_id")
-
-  #   if the_alternative.valid?
-  #     the_alternative.save
-  #     redirect_to("/alternatives/#{the_alternative.id}", { :notice => "Alternative updated successfully."} )
-  #   else
-  #     redirect_to("/alternatives/#{the_alternative.id}", { :alert => "Alternative failed to update successfully." })
-  #   end
-  # end
-
   def destroy
     the_id = params.fetch("path_id")
     the_alternative = Alternative.where({ :id => the_id }).at(0)

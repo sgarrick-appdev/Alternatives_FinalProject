@@ -1,22 +1,12 @@
 Rails.application.routes.draw do
 
+get("/", {:controller => "original_ingredients", :action => "index"})
+
   # Routes for the Comment resource:
 
   # CREATE
   post("/insert_comment", { :controller => "comments", :action => "create" })
-          
-  # # READ
-  # get("/comments", { :controller => "comments", :action => "index" })
   
-  # get("/comments/:path_id", { :controller => "comments", :action => "show" })
-  
-  # # UPDATE
-  
-  # post("/modify_comment/:path_id", { :controller => "comments", :action => "update" })
-  
-  # # DELETE
-  # get("/delete_comment/:path_id", { :controller => "comments", :action => "destroy" })
-
   #------------------------------
 
   # Routes for the Favorite resource:
@@ -27,75 +17,12 @@ Rails.application.routes.draw do
   # READ
   get("/favorites", { :controller => "favorites", :action => "index" })
   
-  # get("/favorites/:path_id", { :controller => "favorites", :action => "show" })
-  
-  # # UPDATE
-  
-  # post("/modify_favorite/:path_id", { :controller => "favorites", :action => "update" })
   
   # DELETE
   get("/delete_favorite/:path_id", { :controller => "favorites", :action => "destroy" })
 
-  #------------------------------
 
-  # # Routes for the User sensitivity resource:
-
-  # # CREATE
-  # post("/insert_user_sensitivity", { :controller => "user_sensitivities", :action => "create" })
-          
-  # # READ
-  # get("/user_sensitivities", { :controller => "user_sensitivities", :action => "index" })
-  
-  # get("/user_sensitivities/:path_id", { :controller => "user_sensitivities", :action => "show" })
-  
-  # # UPDATE
-  
-  # post("/modify_user_sensitivity/:path_id", { :controller => "user_sensitivities", :action => "update" })
-  
-  # # DELETE
-  # get("/delete_user_sensitivity/:path_id", { :controller => "user_sensitivities", :action => "destroy" })
-
-  #------------------------------
-
-  # Routes for the Food sensitivity resource:
-
-  # CREATE
-  post("/insert_food_sensitivity", { :controller => "food_sensitivities", :action => "create" })
-          
-  # READ
-  get("/food_sensitivities", { :controller => "food_sensitivities", :action => "index" })
-  
-  get("/food_sensitivities/:path_id", { :controller => "food_sensitivities", :action => "show" })
-  
-  # UPDATE
-  
-  post("/modify_food_sensitivity/:path_id", { :controller => "food_sensitivities", :action => "update" })
-  
-  # DELETE
-  get("/delete_food_sensitivity/:path_id", { :controller => "food_sensitivities", :action => "destroy" })
-
-  #------------------------------
-
-  # Routes for the Sensitivity resource:
-
-  # CREATE
-  post("/insert_sensitivity", { :controller => "sensitivities", :action => "create" })
-          
-  # READ
-  get("/sensitivities", { :controller => "sensitivities", :action => "index" })
-  
-  get("/sensitivities/:path_id", { :controller => "sensitivities", :action => "show" })
-  
-  # UPDATE
-  
-  post("/modify_sensitivity/:path_id", { :controller => "sensitivities", :action => "update" })
-  
-  # DELETE
-  get("/delete_sensitivity/:path_id", { :controller => "sensitivities", :action => "destroy" })
-
-  #------------------------------
-
-  get("/", {:controller => "application", :action => "index"})
+  # #------------------------------
 
 
   # Routes for the Alternative resource:
@@ -107,32 +34,10 @@ Rails.application.routes.draw do
   get("/alternatives", { :controller => "alternatives", :action => "index" })
   
   get("/alternatives/:path_id", { :controller => "alternatives", :action => "show" })
-  
-  # UPDATE
-  
-  # post("/modify_alternative/:path_id", { :controller => "alternatives", :action => "update" })
+
   
   # DELETE
   get("/delete_alternative/:path_id", { :controller => "alternatives", :action => "destroy" })
-
-  #------------------------------
-
-  # Routes for the Type resource:
-
-  # # CREATE
-  # post("/insert_type", { :controller => "types", :action => "create" })
-          
-  # # READ
-  # get("/types", { :controller => "types", :action => "index" })
-  
-  # get("/types/:path_id", { :controller => "types", :action => "show" })
-  
-  # # UPDATE
-  
-  # post("/modify_type/:path_id", { :controller => "types", :action => "update" })
-  
-  # # DELETE
-  # get("/delete_type/:path_id", { :controller => "types", :action => "destroy" })
 
   #------------------------------
 
@@ -147,13 +52,6 @@ Rails.application.routes.draw do
   
   get("/original_ingredients/:path_id", { :controller => "original_ingredients", :action => "show" })
   
-  # # UPDATE
-  
-  # post("/modify_original_ingredient/:path_id", { :controller => "original_ingredients", :action => "update" })
-  
-  # # DELETE
-  # get("/delete_original_ingredient/:path_id", { :controller => "original_ingredients", :action => "destroy" })
-
   #------------------------------
 
   # Routes for the User account:
