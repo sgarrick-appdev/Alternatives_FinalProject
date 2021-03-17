@@ -53,16 +53,24 @@
 
 <%@matching_alternative_pairs.each do |an_alternative_pair|%>
 
-<dl>
-      <dt>
+<table>
+      <tr>
+      <td>
         <% @alt_id = an_alternative_pair.alternative_ingredient_id%>
         <%= @ingredients.where(:id => @alt_id).first.original%>
-      </dt>
-      <dt>
+      </td>
+      <td>
         <a href = '/alternatives/<%=an_alternative_pair.id%>'>details about this alternative</a>
-      </dt>
-
-  </dl>
+      </td>
+      <% @alt_id = an_alternative_pair.alternative_ingredient_id%>
+      <% @matching_sensitivities = @food_sensitivities.where(:ingredient_id => @alt_id)%>
+      <%@matching_sensitivities.each do |a_sensitivity|%>
+    <td>
+    sensitivities: <%=a_sensitivity.sensitivity.name%>
+    <%end%>
+    </td>
+      </tr>
+  </table>
 
 <%end%>
     

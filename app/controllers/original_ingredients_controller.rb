@@ -18,14 +18,16 @@ class OriginalIngredientsController < ApplicationController
     @list_of_sensitivities = Sensitivity.all
     @alternatives = Alternative.all
     @ingredients = OriginalIngredient.all
+    @food_sensitivities = FoodSensitivity.all
 
     the_id = params.fetch("path_id")
     matching_original_ingredients = OriginalIngredient.where({ :id => the_id })
     @the_original_ingredient = matching_original_ingredients.at(0)
 
     @matching_alternative_pairs =  @alternatives.where({:original_ingredient_id => the_id})
-
     @user_id = session[:user_id]
+
+    
 
     render({ :template => "original_ingredients/show.html.erb" })
   end
