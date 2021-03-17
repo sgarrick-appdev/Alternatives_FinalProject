@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_16_174736) do
+ActiveRecord::Schema.define(version: 2021_03_17_023222) do
 
   create_table "alternatives", force: :cascade do |t|
     t.integer "original_ingredient_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2021_03_16_174736) do
     t.integer "dietary_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["ingredient_id", "sensitivity_id"], name: "index_food_sensitivities_on_ingredient_id_and_sensitivity_id", unique: true
   end
 
   create_table "likes", force: :cascade do |t|

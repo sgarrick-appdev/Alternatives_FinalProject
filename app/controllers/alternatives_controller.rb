@@ -16,8 +16,8 @@ class AlternativesController < ApplicationController
     original_id = @the_alternative.original_ingredient_id
     matching_ingredient_alt = ingredients.where({:id => alt_id}).first
     @alternative_name = matching_ingredient_alt.original
-    matching_ingredient_OG = ingredients.where({:id => original_id}).first
-    @original_name = matching_ingredient_OG.original
+    @matching_ingredient_OG = ingredients.where({:id => original_id}).first
+    @original_name = @matching_ingredient_OG.original
     @user_id = session[:user_id]
     @matching_comments = Comment.all.where({:ingredient_id => the_id})
     @matching_favorite = Favorite.all.where({:user_id => @user_id, :alternative_id => the_id}).first
@@ -34,6 +34,7 @@ class AlternativesController < ApplicationController
     original_type = params.fetch("query_type_id")
     notes = params.fetch("query_notes")
     user_id = params.fetch("user_id_query")
+    @sensitivity_ids = params.fetch("sensitivity_id")
 
     #does the alternative ingredient already exist?
     new_ingredient_alt = OriginalIngredient.new
@@ -47,6 +48,15 @@ class AlternativesController < ApplicationController
       new_alternative_pair.alternative_ingredient_id = new_ingredient_alt.id
       new_alternative_pair.user_id = user_id
       new_alternative_pair.save
+      @sensitivity_ids.each do |an_id|
+      int_id = an_id.to_i
+      new_food_sensitivity = FoodSensitivity.new
+      new_food_sensitivity.ingredient_id = new_ingredient_alt.id
+      new_food_sensitivity.sensitivity_id = int_id
+        if new_food_sensitivity.valid?
+          new_food_sensitivity.save
+        end
+      end
       redirect_to("/original_ingredients/#{new_alternative_pair.original_ingredient_id}", { :notice => "Original ingredient created successfully."})
       end
     else #does already exist - but does the alternative pair already exist?
@@ -57,12 +67,20 @@ class AlternativesController < ApplicationController
       new_alternative_pair.alternative_ingredient_id = @ingredient_alt.id
       new_alternative_pair.user_id = user_id
       new_alternative_pair.save
+      @sensitivity_ids.each do |an_id|
+      int_id = an_id.to_i
+      new_food_sensitivity = FoodSensitivity.new
+      new_food_sensitivity.ingredient_id = new_ingredient_alt.id
+      new_food_sensitivity.sensitivity_id = int_id
+        if new_food_sensitivity.valid?
+          new_food_sensitivity.save
+        end
+      end
       redirect_to("/original_ingredients/#{new_alternative_pair.original_ingredient_id}", { :notice => "Original ingredient pair created successfully." })
       else
         redirect_to("/original_ingredients/#{@ingredient_OG.id}", { :alert => "Original ingredient pair exists."})
       end
     end
-    
   end
 
   # def update

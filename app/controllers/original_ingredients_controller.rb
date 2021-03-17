@@ -26,9 +26,8 @@ class OriginalIngredientsController < ApplicationController
 
     @matching_alternative_pairs =  @alternatives.where({:original_ingredient_id => the_id})
     @user_id = session[:user_id]
-
     
-
+    
     render({ :template => "original_ingredients/show.html.erb" })
   end
 
@@ -51,7 +50,8 @@ class OriginalIngredientsController < ApplicationController
     alternative_name = params.fetch("query_alternative")
     original_type = params.fetch("query_type_id")
     user_id = params.fetch("user_id_query")
-  
+    @sensitivity_ids = params.fetch("sensitivity_id")
+    
     new_ingredient_OG = OriginalIngredient.new
     new_ingredient_OG.original = original_name.downcase
     new_ingredient_OG.type_id = original_type
@@ -67,8 +67,17 @@ class OriginalIngredientsController < ApplicationController
     if new_ingredient_alt.valid?
       new_ingredient_alt.save
     else
-      new_ingredient_alt = @ingredients.where({:original => alternative_name}).first
+      new_ingredient_alt = @ingredients.where({:original => alternative_name.downcase}).first
     end
+      @sensitivity_ids.each do |an_id|
+      int_id = an_id.to_i
+      new_food_sensitivity = FoodSensitivity.new
+      new_food_sensitivity.ingredient_id = new_ingredient_alt.id
+      new_food_sensitivity.sensitivity_id = int_id
+        if new_food_sensitivity.valid?
+          new_food_sensitivity.save
+        end
+      end
     if @list_of_alternatives.where({:alternative_ingredient_id =>new_ingredient_alt.id,:original_ingredient_id =>new_ingredient_OG.id }).first==nil
       new_alternative_pair = Alternative.new
       new_alternative_pair.original_ingredient_id = new_ingredient_OG.id

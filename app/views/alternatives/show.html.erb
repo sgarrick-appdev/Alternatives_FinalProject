@@ -6,6 +6,10 @@
 
 <hr>
 
+<a href = "/original_ingredients/<%=@matching_ingredient_OG.id%>">Go back</a>
+
+<hr>
+
 <%if @user_id != nil%>
 <% matching_records = Favorite.where({ :user_id => @user_id, :alternative_id => @the_alternative.id }) %>
 <% favorite = matching_records.at(0) %>

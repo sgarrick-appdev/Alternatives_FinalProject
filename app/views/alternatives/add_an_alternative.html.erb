@@ -31,6 +31,15 @@
 
         <textarea id="notes_box" name="query_notes" rows="3" placeholder = "e.g. links to recipes, cooking notes, measurement instructions..."></textarea>
       </div>
+        <div>
+        Does the alternative have any sensitivities?
+        <% Sensitivity.all.each do |sensitivity| %>
+        <label>
+          <%= check_box_tag('[sensitivity_id][]', sensitivity.id) %>
+          <%= sensitivity.name %>
+        </label>
+          <% end %>
+      </div>
 
       <div>
         <label for="type_id_box">
