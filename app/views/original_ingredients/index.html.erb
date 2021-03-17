@@ -7,34 +7,45 @@
 </div>
 
 <hr>
-<h3>Search by:</h3>
-  <div>
-    <form action="/original_ingredients" method="get">
-    <label for="original_box">What do you need an alternative for?</label>
-    <input type="text" id="original_box" name="query_original" placeholder = "sugar">
-  </div>
-What type of alternatives are you looking for?
-  <div>
-    <%@list_of_types.each do |a_type|%>
-    <%= check_box_tag("type_ids[]", a_type.id) %>
-    <%=h a_type.name %>
-<% end %>
-  </div>
+
+<%= search_form_for @q do |f| %>
+  <p>Search by name of ingredient, type, or both:</p>
 
   <div>
-    <button>Find alternatives!</button>
+    <%= f.label :original_cont, "What do you need an alternative for?" %>
+    <%= f.text_field :original_cont, :placeholder => "e.g. sugar" %>
   </div>
-</form>
+
+<div>
+  <% Type.all.each do |type| %>
+    <label>
+      <%= check_box_tag('q[type_id_eq_any][]', type.id, (true if @q.type_id_eq_any.try(:include?, type.id))) %>
+      <%= type.name %>
+    </label>
+  <% end %>
+</div>
+
+
+
+
+  <%= f.submit :class => "btn btn-primary btn-block" %>
+  <a href="/original_ingredients">Clear filters</a>
+
+<% end %>
+
+
 <hr>
 <%if @user_id != nil%>
 <h3> Can't find what you are looking for? <a href = "/create_new_alternative">add a new one!</a></h3>
 <%end%>
 <hr>
-<div>
-  <div>
-    <table>
-      <tr>
 
+<%if @check_presence == nil%>
+No results!
+<%else%>
+<div>
+  <table>
+      <tr>
         <th>
           Original Ingredient
         </th>
@@ -44,22 +55,21 @@ What type of alternatives are you looking for?
         </th>
 
       </tr>
-
-      <% @list_of_alternatives.each do |an_ingredient| %>
+   <% @matching_ingredients.each do |an_ingredient| %>
+   <%if @list_of_alternatives.where({:original_ingredient_id => an_ingredient.id}).first!= nil%>
       <tr>
         <td>
-          <%= an_ingredient.original_ingredient.original %>
+          <%= an_ingredient.original %>
         </td>
 
         <td>
-          <a href="/original_ingredients/<%= an_ingredient.original_ingredient_id %>">
+          <a href="/original_ingredients/<%= an_ingredient.id %>">
             Show alternatives
           </a>
         </td>
       </tr>
-      <% end %>
+      <%end%>
+    <%end%>
     </table>
   </div>
-</div>
-
-<hr>
+ <% end %>

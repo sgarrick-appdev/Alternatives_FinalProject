@@ -6,6 +6,12 @@ class OriginalIngredientsController < ApplicationController
     @ingredients = OriginalIngredient.all
     @user_id = session[:user_id]
 
+    @q = @ingredients.ransack(params[:q])
+    @matching_ingredients = @q.result(:distinct => true).includes(:type)
+
+    
+
+    @check_presence = @matching_ingredients.first
     render({ :template => "original_ingredients/index.html.erb" })
   end
 

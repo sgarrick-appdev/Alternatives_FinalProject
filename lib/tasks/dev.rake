@@ -38,14 +38,26 @@ task({ :sample_data => :environment}) do
 # ingredient.save
 # end
 
-notes = ["read instructions on stevia packet for measurement conversion", "N/A ","N/A ","use 3 times the amount of baking powder in lieu of baking soda"]
-alternative_id = [5,6,7,8]
-OG_id = [1,2,3,4]
+# notes = ["read instructions on stevia packet for measurement conversion", "N/A ","N/A ","use 3 times the amount of baking powder in lieu of baking soda"]
+# alternative_id = [5,6,7,8]
+# OG_id = [1,2,3,4]
+# 4.times do |count|
+# alternative_pair = Alternative.new
+# alternative_pair.notes = notes.at(count)
+# alternative_pair.alternative_ingredient_id = alternative_id.at(count)
+# alternative_pair.original_ingredient_id = OG_id.at(count)
+# alternative_pair.save
+# end
+
+ingredient_id = [1, 2, 6, 3]
+sensitivity_id = [6,1, 4, 8]
+
 4.times do |count|
-alternative_pair = Alternative.new
-alternative_pair.notes = notes.at(count)
-alternative_pair.alternative_ingredient_id = alternative_id.at(count)
-alternative_pair.original_ingredient_id = OG_id.at(count)
-alternative_pair.save
+food_sensitivity = FoodSensitivity.new
+food_sensitivity.ingredient_id = ingredient_id.at(count)
+food_sensitivity.sensitivity_id = sensitivity_id.at(count)
+food_sensitivity.save
 end
+
+
 end
