@@ -3,7 +3,7 @@
 
   <div>
     <%= f.label :original_cont, "What do you need an alternative for?", :class => "font-weight-bold" %>
-    <%= f.text_field :original_cont, :placeholder => "e.g. sugar", :class => "form-control form-control-sm col-md-3"%>
+    <%= f.text_field :original_cont, :placeholder => "e.g. sugar", :class => "form-control form-control-md col-md-6"%>
   </div>
 <div class = "py-6 font-weight-bold">Looking for a specific type of alternative?</div>
 <div>
@@ -23,24 +23,25 @@
 <%if @check_presence == nil%>
 No results!
 <%else%>
-<div>
+<div class = "offset-sm-1">
   <table>
   <%unless params[:q].blank?%>
    <% @matching_ingredients.each do |an_ingredient| %>
    <%if @list_of_alternatives.where({:original_ingredient_id => an_ingredient.id}).first!= nil%>
-      <tr>
-        <td>
-          <%= an_ingredient.original %>
-        </td>
-        <td>
-          <a href="/original_ingredients/<%= an_ingredient.id %>">
-            Show alternatives
-          </a>
-        </td>
-      </tr>
-      <%end%>
+      <div class = "container">
+        <div class = "row justify-content-between">
+          <div class = "col-4 py-6">
+             <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">  <%= an_ingredient.original %></h5>
+                        <a href="/original_ingredients/<%= an_ingredient.id %>" class="card-link">Show alternatives</a>
+            </div>
+        </div>
+  </div>
+<%end%>
+</div>
+</div>
     <%end%>
-    </table>
   </div>
   <%end%>
  <% end %>

@@ -11,11 +11,12 @@
   </ol>
 </nav>
 
+
 <%@matching_alternative_pairs.each do |an_alternative_pair|%>
 
-
-<div class = "row">
-  <div class="col-sm-6 offset-md-1 py-6">
+<div class = "container">
+  <div class = "row justify-content-between">
+  <div class = "col-6 py-6">
     <div class="card">
       <div class="card-body">
         <% @alt_id = an_alternative_pair.alternative_ingredient_id%> 
@@ -34,15 +35,18 @@
           <a href="/alternatives/<%=an_alternative_pair.id%>" class="card-link">More info</a>
       </div>
     </div>
-  
   </div>
-</div>
 <%end%>
+</div>
+</div>
+
+<hr>
 
 <%if @user_id != nil%>
-  <div class="col-md-8 offset-md-1">
-  <div><h3>add new alternatives</h3></div>
-      <form action="/insert_alternative" method="post"  class = "col-md-4 offset-md-1">
+<div class="row justify-content-around">
+  <div class="col-8 py-100 ">
+  <div><h5>add a new alternative</h5></div>
+      <form action="/insert_alternative" method="post">
         <input type = "hidden" name = "user_id_query" value = <%=@user_id%>>
         
         <div>
@@ -50,21 +54,21 @@
         </div>
 
         <div class="form-group">
-          <label for="alternative_box">
+          <label for="alternative_box" class = "font-weight-bold">
             Alternative
           </label>
-          <input type="text" id="alternative_box" name="query_alternative" placeholder = "stevia">
+          <input type="text" id="alternative_box" name="query_alternative" placeholder = "e.g. almond milk">
         </div>
 
         <div class="form-group">
-          <label for="notes_box">
+          <label for="notes_box" class = "font-weight-bold">
             Notes
           </label>
-          <textarea id="notes_box" name="query_notes" rows="3" placeholder = "e.g. links to recipes, cooking notes, measurement instructions..."></textarea>
+          <textarea class="form-control" id="notes_box" name="query_notes" rows="3" placeholder = "e.g. links to recipes, cooking notes, measurement instructions..."></textarea>
         </div>
 
         <div class="form-group">
-        Does the alternative have any sensitivities?
+        <span class = "font-weight-bold">Does the alternative have any sensitivities?</span>
         <% Sensitivity.all.each do |sensitivity| %>
         <label>
           <%= check_box_tag('[sensitivity_id][]', sensitivity.id) %>
@@ -74,16 +78,14 @@
       </div>
 
         <div>
-          <input value = "<%=@the_original_ingredient.type_id%>" name="query_type_id" type = "hidden"></input>
+          <input class="form-control" value = "<%=@the_original_ingredient.type_id%>" name="query_type_id" type = "hidden"></input>
           </select>
         </div>
 
-        <button>
+        <button class="btn btn-success">
           add new alternative
         </button>
       </form>
     </div>
-  <%end%>
-
-
-
+    <%end%>
+</div>

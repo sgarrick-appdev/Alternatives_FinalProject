@@ -1,78 +1,85 @@
 <div>
   <div>
-    <h1>
+    <h3 class = "py-6 offset-md-1">
     <%= @alternative_name %> as an alternative for <%=@original_name%>
-    </h1>
+    </h3>
 
-<hr>
 
-<a href = "/original_ingredients/<%=@matching_ingredient_OG.id%>">Go back</a>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/original_ingredients">Search</a></li>
+    <li class="breadcrumb-item"><a href="/original_ingredients/<%=@matching_ingredient_OG.id%>"><%=@original_name%> alternatives</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><a href="/original_ingredients"></a><%= @alternative_name %></li>
+  </ol>
+</nav>
 
-<hr>
 
 <%if @user_id != nil%>
 <% matching_records = Favorite.where({ :user_id => @user_id, :alternative_id => @the_alternative.id }) %>
 <% favorite = matching_records.at(0) %>
 <% if favorite == nil %>
+<div class = "offset-md-1">
 <form action = "/insert_favorite" method = "post">
 <input type = "hidden" name = "query_user" value = "<%=@user_id%>">
 <input type = "hidden" name = "query_alt" value = "<%=@the_alternative.id%>">
-<button>Favorite this alternative!</button>
+<button class="btn btn-warning btn-sm"><span class = "font-weight-bold">Favorite this alternative!</span></button>
 </form>
 <%else%>
-<a href="/delete_favorite/<%= favorite.id %>">Un-favorite</a>
+<a href="/delete_favorite/<%= favorite.id %>"> <span class="badge badge-danger offset-md-1">Un-favorite</span></a>
 <%end%>
 <%end%>
-
-<hr>
-
-<h3>Notes about using stevia as an alternative</h3>
-<div>
-<%=@the_alternative.notes%>
 </div>
-<hr>
-<h3>Comments about this alternative</h3>
-<%@matching_comments.each do |a_comment|%>
-<table>
-<tr>
-<th>
-Username
-</th>
-<th>
-Comment
-</th>
-</tr>
-<tr>
-<td>
-<%=a_comment.commenter.username%>
-</td>
-<td>
-<%=a_comment.body%>
-</td>
-</tr>
 
-</table>
+
+<div class = "container">
+  <div class = "row justify-content-between">
+  <div class = "col-6 py-6">
+    <div class="card">
+      <div class="card-body">
+      
+          <h5 class="card-title"> Notes </h5><%=@the_alternative.notes%><p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+		<h2>Comments</h2>
+	</div>
+  <%@matching_comments.each do |a_comment|%>
+	<div class="row comment">
+	    <div class="head">
+	        <small><strong class='user'><%=a_comment.commenter.username%></strong></small>
+	    </div>    
+	    <p> <%=a_comment.body%></p>
+	</div>
+	<%end%>
+
+<%if @user_id!= nil%>
+	<div >
+	    <form action = "/insert_comment" method = "post">
+      <input type = "hidden" name = "user_query_id" value = "<%=@user_id%>" >
+      <input type = "hidden" name = "alt_query_id" value = "<%= @the_alternative.id%>" >
+      <div class = "form-group">
+      <textarea class="form-control col-6 py-6" name="query_comment" rows="1"></textarea>
+      </div>
+      <button class="btn btn-secondary btn-sm">comment</button>
+      </form>
+	</div>
 <%end%>
-<hr>
+<div class = "offset-md-1 py-100">
 <%if @user_id == @the_alternative.user_id%>
     <div>
       <div>
         <a href="/delete_alternative/<%= @the_alternative.id %>">
-          <button>Delete alternative</button>
+          <button class="btn btn-danger btn-sm">Delete alternative</button>
         </a>
       </div>
     </div>
-<hr>
-<%end%>
-<%if @user_id!= nil%>
-<div>
-<form action = "/insert_comment" method = "post">
-Add a comment!
-<input type = "hidden" name = "user_query_id" value = "<%=@user_id%>" >
-<input type = "hidden" name = "alt_query_id" value = "<%= @the_alternative.id%>" >
-<textarea name="query_comment" rows="3"></textarea>
-<button>comment</button>
-</form>
 </div>
+
 <%end%>
 

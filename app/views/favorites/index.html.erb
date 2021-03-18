@@ -1,49 +1,26 @@
 <div>
   <div>
-    <h1>
+    <h3 class = "py-6 offset-md-1">
       <%=@this_user.username%>'s Favorites
-    </h1>
+    </h3>
   </div>
 </div>
-
-
-<hr>
-<div>
-  <div>
-    <table>
-      <tr>
-        <th>
-          Original
-        </th>
-
-        <th>
-          Alternative
-        </th>
-        <th>
-          Show details
-        </th>
-
-      </tr>
 
       <% @user_faves.each do |a_favorite| %>
-      <tr>
-        <td>
-         <%= a_favorite.alternative.original_ingredient.original %>
-        </td>
+     <div class = "container">
+  <div class = "row justify-content-between">
+  <div class = "col-6 py-6">
+    <div class="card">
+      <div class="card-body">
+      
+          <h5 class="card-title">  <%= a_favorite.alternative.alternative_ingredient.original %> instead of <%= a_favorite.alternative.original_ingredient.original %></h5>
 
-        <td>
-          <%= a_favorite.alternative.alternative_ingredient.original %>
-        </td>
+        <p class="card-text"><%= a_favorite.alternative.notes%></p>
 
-        <td>
-          <a href="/alternatives/<%= a_favorite.alternative_id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
+          <a href="/alternatives/<%= a_favorite.alternative_id %>" class="card-link">Show details</a>
+      </div>
+    </div>
   </div>
+<%end%>
 </div>
-
-<hr>
+</div>
