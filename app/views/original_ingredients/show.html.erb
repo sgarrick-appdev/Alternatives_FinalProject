@@ -1,42 +1,69 @@
 <div>
   <div>
-    <h1>
+    <h1 class = "offset-md-1 py-6">
       alternatives for <%= @the_original_ingredient.original %>
     </h1>
 
-    <div>
-      <div>
-        <a href="/original_ingredients">
-          Go back
-        </a>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/original_ingredients">Search</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= @the_original_ingredient.original %> alternatives</li>
+  </ol>
+</nav>
+
+<%@matching_alternative_pairs.each do |an_alternative_pair|%>
+
+
+<div class = "row">
+  <div class="col-sm-6 offset-md-1 py-6">
+    <div class="card">
+      <div class="card-body">
+        <% @alt_id = an_alternative_pair.alternative_ingredient_id%> 
+          <h5 class="card-title"> <%= @ingredients.where(:id => @alt_id).first.original%></h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+          <% @alt_id = an_alternative_pair.alternative_ingredient_id%>
+            <% @matching_sensitivities = @food_sensitivities.where(:ingredient_id => @alt_id)%>
+            <%@matching_sensitivities.each do |a_sensitivity|%>
+          <%if a_sensitivity.sensitivity.name == "none"%>
+          <%else%>
+          <span class="badge badge-danger"><%=a_sensitivity.sensitivity.name%></span>
+          <%end%>
+          <%end%>
+          </h6>
+          <p class="card-text"><%= an_alternative_pair.notes%></p>
+          <a href="/alternatives/<%=an_alternative_pair.id%>" class="card-link">More info</a>
       </div>
     </div>
+  
+  </div>
+</div>
+<%end%>
 
 <%if @user_id != nil%>
-<h3>add new alternatives</h3>
-  <div>
-      <form action="/insert_alternative" method="post">
+  <div class="col-md-8 offset-md-1">
+  <div><h3>add new alternatives</h3></div>
+      <form action="/insert_alternative" method="post"  class = "col-md-4 offset-md-1">
         <input type = "hidden" name = "user_id_query" value = <%=@user_id%>>
         
         <div>
           <input type="hidden" value =" <%=@the_original_ingredient.id%>" name="query_original" placeholder = "sugar">
         </div>
 
-        <div>
+        <div class="form-group">
           <label for="alternative_box">
             Alternative
           </label>
           <input type="text" id="alternative_box" name="query_alternative" placeholder = "stevia">
         </div>
 
-        <div>
+        <div class="form-group">
           <label for="notes_box">
             Notes
           </label>
           <textarea id="notes_box" name="query_notes" rows="3" placeholder = "e.g. links to recipes, cooking notes, measurement instructions..."></textarea>
         </div>
 
-        <div>
+        <div class="form-group">
         Does the alternative have any sensitivities?
         <% Sensitivity.all.each do |sensitivity| %>
         <label>
@@ -59,32 +86,4 @@
   <%end%>
 
 
-<h3>alternatives</h3>
 
-<%@matching_alternative_pairs.each do |an_alternative_pair|%>
-
-<table>
-      <tr>
-      <td>
-        <% @alt_id = an_alternative_pair.alternative_ingredient_id%>
-        <%= @ingredients.where(:id => @alt_id).first.original%>
-      </td>
-      <td>
-        <a href = '/alternatives/<%=an_alternative_pair.id%>'>details about this alternative</a>
-      </td>
-      <% @alt_id = an_alternative_pair.alternative_ingredient_id%>
-      <% @matching_sensitivities = @food_sensitivities.where(:ingredient_id => @alt_id)%>
-      <%@matching_sensitivities.each do |a_sensitivity|%>
-    <td>
-    sensitivities: <%=a_sensitivity.sensitivity.name%>
-    <%end%>
-    </td>
-      </tr>
-  </table>
-
-<%end%>
-    
-  </div>
-</div>
-
-<hr>

@@ -53,17 +53,27 @@
   
 </nav>
 
-  <% if notice.blank? %>
+  <%= yield %>
+
+  </body>
+   
+   <% if notice.blank? %>
   <%else%>
-  <div class="col-md-3 alert alert-success" role="alert" colspan = 2><%= notice %></div>
+  <div class="col-md-3 alert alert-success alert-dismissible fade show" role="alert" colspan = 2><%= notice %>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
   <%end%>
 
   <% if alert.blank? %>
   <%else%>
-  <div class="col-md-3 alert alert-danger" role="alert"><%= alert %></div>
+  <div class="col-md-3 alert alert-danger alert-dismissible fade show" role="alert"><%= alert %>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
   <%end%>
-  <%= yield %>
 
-  </body>
-  
+
 </html>
