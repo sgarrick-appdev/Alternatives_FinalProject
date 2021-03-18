@@ -47,16 +47,14 @@ task({ :sample_data => :environment}) do
 # alternative_pair.save
 # end
 
-# sensitivities = ["sugar","dairy alternative","none", "none", "none" ,"nuts", "none","none"]
-ingredient_id = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-sensitivity_id = [6, 1, 8, 8, 8, 4, 8, 8, 4, 4, 4, 6, 6]
+# ingredient_id = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+# sensitivity_id = [6, 1, 8, 8, 8, 4, 8, 8, 4, 4, 4, 6, 6]
 
-13.times do |count|
-food_sensitivity = FoodSensitivity.new
-food_sensitivity.ingredient_id = ingredient_id.at(count)
-food_sensitivity.sensitivity_id = sensitivity_id.at(count)
-food_sensitivity.save
-end
-
+# 13.times do |count|
+# food_sensitivity = FoodSensitivity.new
+# food_sensitivity.ingredient_id = ingredient_id.at(count)
+# food_sensitivity.sensitivity_id = sensitivity_id.at(count)
+# food_sensitivity.save
+# end
 
 end
