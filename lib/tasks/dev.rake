@@ -26,33 +26,32 @@ task({ :sample_data => :environment}) do
 #  s.save
 # end
 
-# original_names = ["sugar", "milk", "canola oil", "baking soda", "stevia", "almond milk", "grapeseed oil", "baking powder"]
-# sensitivities = ["sugar","dairy","none", "none", "none" ,"nuts", "none","none"]
-# type_ids = [2, 3, 1, 10, 2, 42, 1, 10]
+# original_names = ["sugar", "milk", "canola oil", "baking soda", "stevia", "almond milk", "grapeseed oil", "baking powder", "peanut butter", "almond butter", "cashew butter", "coconut sugar", "honey"]
+# type_ids = [2, 42, 1, 10, 2, 42, 1, 10, 5, 5, 5, 2, 2]
 
-# 8.times do |count|
+# 13.times do |count|
 # ingredient = OriginalIngredient.new
 # ingredient.original = original_names.at(count)
-# ingredient.sensitivity = sensitivities.at(count)
 # ingredient.type_id = type_ids.at(count)
 # ingredient.save
 # end
 
-# notes = ["read instructions on stevia packet for measurement conversion", "N/A ","N/A ","use 3 times the amount of baking powder in lieu of baking soda"]
-# alternative_id = [5,6,7,8]
-# OG_id = [1,2,3,4]
-# 4.times do |count|
+# notes = ["read instructions on stevia packet/container for measurement conversion", "1:1 ratio ","1:1 ratio","use 3 times the amount of baking powder in lieu of baking soda", "1:1 ratio", "1:1 ratio", "read instructions on coconut sugar container - great substitute for brown sugar", "measurement depends on your tastes - great alternative to sugar in tea!"]
+# alternative_id = [5,6,7,8, 10, 11, 12, 13]
+# id_OG = [1,2,3,4, 9, 9, 1, 1]
+# 8.times do |count|
 # alternative_pair = Alternative.new
 # alternative_pair.notes = notes.at(count)
 # alternative_pair.alternative_ingredient_id = alternative_id.at(count)
-# alternative_pair.original_ingredient_id = OG_id.at(count)
+# alternative_pair.original_ingredient_id = id_OG.at(count)
 # alternative_pair.save
 # end
 
-ingredient_id = [1, 2, 6, 3]
-sensitivity_id = [6,1, 4, 8]
+# sensitivities = ["sugar","dairy alternative","none", "none", "none" ,"nuts", "none","none"]
+ingredient_id = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+sensitivity_id = [6, 1, 8, 8, 8, 4, 8, 8, 4, 4, 4, 6, 6]
 
-4.times do |count|
+13.times do |count|
 food_sensitivity = FoodSensitivity.new
 food_sensitivity.ingredient_id = ingredient_id.at(count)
 food_sensitivity.sensitivity_id = sensitivity_id.at(count)
