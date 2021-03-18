@@ -23,8 +23,8 @@
           <h5 class="card-title"> <%= @ingredients.where(:id => @alt_id).first.original%></h5>
           <h6 class="card-subtitle mb-2 text-muted">
           <% @alt_id = an_alternative_pair.alternative_ingredient_id%>
-            <% @matching_sensitivities = @food_sensitivities.where(:ingredient_id => @alt_id)%>
-            <%@matching_sensitivities.each do |a_sensitivity|%>
+          <% @matching_sensitivities = @food_sensitivities.where(:ingredient_id => @alt_id)%>
+          <%@matching_sensitivities.each do |a_sensitivity|%>
           <%if a_sensitivity.sensitivity.name == "none"%>
           <%else%>
           <span class="badge badge-danger"><%=a_sensitivity.sensitivity.name%></span>

@@ -1,38 +1,36 @@
 <div>
   <div>
-    <h2>
+    <h2 class = "offset-md-1 py-6">
       Add a new alternative
     </h2>
 
-    <form action="/insert_original_ingredient" method="post">
+    <form action="/insert_original_ingredient" method="post" class = "col-md-4 offset-md-1">
       <input type = "hidden" name = "user_id_query" value = "<%=@user_id%>">
       
-      <div>
+      <div class="form-group">
         <label for="original_box">
-          Original
+          <span class = "font-weight-bold">Original</span>
         </label>
 
-        <input type="text" id="original_box" name="query_original" placeholder = "sugar">
+        <input class="form-control" type="text" id="original_box" name="query_original" placeholder = "sugar">
       </div>
 
-      <div>
+      <div class="form-group">
         <label for="alternative_box">
-          Alternative
+          <span class = "font-weight-bold">Alternative</span>
         </label>
 
-        <input type="text" id="alternative_box" name="query_alternative" placeholder = "stevia">
+        <input class="form-control" type="text" id="alternative_box" name="query_alternative" placeholder = "stevia">
       </div>
 
-
-      <div>
+      <div class="form-group">
         <label for="notes_box">
-          Notes
+          <span class = "font-weight-bold">Notes</span>
         </label>
-
-        <textarea id="notes_box" name="query_notes" rows="3" placeholder = "e.g. links to recipes, cooking notes, measurement instructions..."></textarea>
+        <textarea class="form-control" id="notes_box" name="query_notes" rows="3" placeholder = "e.g. links to recipes, cooking notes, measurement instructions..."></textarea>
       </div>
-        <div>
-        Does the alternative have any sensitivities?
+        <div class="form-group">
+        <span class = "font-weight-bold">Does the alternative have any sensitivities?</span>
         <% Sensitivity.all.each do |sensitivity| %>
         <label>
           <%= check_box_tag('[sensitivity_id][]', sensitivity.id) %>
@@ -41,18 +39,18 @@
           <% end %>
       </div>
 
-      <div>
+      <div class="form-group">
         <label for="type_id_box">
-          Type
+          <span class="font-weight-bold"> Type</span>
         </label>
-         <select id="type_id_box" name="query_type_id">
+         <select class="form-control" id="type_id_box" name="query_type_id">
           <%@list_of_types.each do |a_type|%>
         <option value = "<%=a_type.id%>"><%=a_type.name%></option>
         <%end%>
         </select>
       </div>
 
-      <button>
+      <button class="btn btn-success">
         Create new alternative
       </button>
     </form>

@@ -51,7 +51,10 @@ class OriginalIngredientsController < ApplicationController
     original_type = params.fetch("query_type_id")
     user_id = params.fetch("user_id_query")
     @sensitivity_ids = params.fetch("sensitivity_id")
-    
+    if @sensitivity_ids.blank?
+      redirect_to("/create_new_alternative", { :alert => "Must add sensitivity field"})
+    else
+    notes = params.fetch("query_notes")
     new_ingredient_OG = OriginalIngredient.new
     new_ingredient_OG.original = original_name.downcase
     new_ingredient_OG.type_id = original_type
@@ -77,11 +80,13 @@ class OriginalIngredientsController < ApplicationController
         if new_food_sensitivity.valid?
           new_food_sensitivity.save
         end
+
       end
     if @list_of_alternatives.where({:alternative_ingredient_id =>new_ingredient_alt.id,:original_ingredient_id =>new_ingredient_OG.id }).first==nil
       new_alternative_pair = Alternative.new
       new_alternative_pair.original_ingredient_id = new_ingredient_OG.id
       new_alternative_pair.alternative_ingredient_id = new_ingredient_alt.id
+      new_alternative_pair.notes = notes
       new_alternative_pair.user_id = user_id
       new_alternative_pair.save
       redirect_to("/original_ingredients/#{new_alternative_pair.original_ingredient_id}", { :notice => "Alternative pair created successfully." })
@@ -90,5 +95,5 @@ class OriginalIngredientsController < ApplicationController
   end
 
   end
-  
+end
 end

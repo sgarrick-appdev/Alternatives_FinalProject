@@ -14,7 +14,7 @@ class FavoritesController < ApplicationController
     the_favorite.user_id = params.fetch("query_user")
     the_favorite.alternative_id = params.fetch("query_alt")
     the_favorite.save
-    redirect_to("/alternatives/#{the_favorite.alternative_id}", { :notice => "Favorite added successfully."} )
+    redirect_to("/alternatives/#{the_favorite.alternative_id}")
   end
 
   def update
@@ -27,7 +27,7 @@ class FavoritesController < ApplicationController
 
     if the_favorite.valid?
       the_favorite.save
-      redirect_to("/favorites/#{the_favorite.id}", { :notice => "Favorite updated successfully."} )
+      redirect_to("/favorites/#{the_favorite.id}")
     else
       redirect_to("/favorites/#{the_favorite.id}", { :alert => "Favorite failed to update successfully." })
     end
@@ -38,6 +38,6 @@ class FavoritesController < ApplicationController
     the_favorite = Favorite.where({ :id => the_id }).at(0)
     alt_id = the_favorite.alternative_id
     the_favorite.destroy
-    redirect_to("/alternatives/#{alt_id}", { :notice => "Favorite deleted successfully."} )
+    redirect_to("/alternatives/#{alt_id}")
   end
 end

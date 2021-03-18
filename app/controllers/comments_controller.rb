@@ -6,6 +6,6 @@ class CommentsController < ApplicationController
     the_comment.commenter_id = params.fetch("user_query_id")
     the_comment.ingredient_id = params.fetch("alt_query_id")
     the_comment.save
-    redirect_to("/alternatives/#{the_comment.ingredient_id}", { :notice => "Alternative updated successfully."} )
+    redirect_to("/alternatives/#{the_comment.ingredient_id}")
   end
 end

@@ -35,6 +35,9 @@ class AlternativesController < ApplicationController
     notes = params.fetch("query_notes")
     user_id = params.fetch("user_id_query")
     @sensitivity_ids = params.fetch("sensitivity_id")
+    if @sensitivity_ids.blank?
+      redirect_to("/original_ingredients/#{@ingredient_OG.id}", {:alert => "Must have a sensitivity field."})
+    else
 
     #does the alternative ingredient already exist?
     new_ingredient_alt = OriginalIngredient.new
@@ -57,7 +60,7 @@ class AlternativesController < ApplicationController
           new_food_sensitivity.save
         end
       end
-      redirect_to("/original_ingredients/#{new_alternative_pair.original_ingredient_id}", { :notice => "Original ingredient created successfully."})
+      redirect_to("/original_ingredients/#{new_alternative_pair.original_ingredient_id}")
       end
     else #does already exist - but does the alternative pair already exist?
       @ingredient_alt = @ingredients.where({:original => alternative_name}).first
@@ -76,11 +79,12 @@ class AlternativesController < ApplicationController
           new_food_sensitivity.save
         end
       end
-      redirect_to("/original_ingredients/#{new_alternative_pair.original_ingredient_id}", { :notice => "Original ingredient pair created successfully." })
+      redirect_to("/original_ingredients/#{new_alternative_pair.original_ingredient_id}")
       else
         redirect_to("/original_ingredients/#{@ingredient_OG.id}", { :alert => "Original ingredient pair exists."})
       end
     end
+  end
   end
 
   def destroy
@@ -88,6 +92,6 @@ class AlternativesController < ApplicationController
     the_alternative = Alternative.where({ :id => the_id }).at(0)
     the_alternative.destroy
     original_ingredient = the_alternative.original_ingredient_id
-    redirect_to("/original_ingredients/#{original_ingredient}", { :notice => "Alternative pair deleted successfully."} )
+    redirect_to("/original_ingredients/#{original_ingredient}")
   end
 end

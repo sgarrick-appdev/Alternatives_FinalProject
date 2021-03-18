@@ -19,7 +19,7 @@ class UserAuthenticationController < ApplicationController
       else
         session[:user_id] = user.id
       
-        redirect_to("/", { :notice => "Signed in successfully." })
+        redirect_to("/")
       end
     else
       redirect_to("/user_sign_in", { :alert => "No user with that email address." })
@@ -48,7 +48,7 @@ class UserAuthenticationController < ApplicationController
     if save_status == true
       session[:user_id] = @user.id
    
-      redirect_to("/", { :notice => "User account created successfully."})
+      redirect_to("/")
     else
       redirect_to("/user_sign_up", { :alert => @user.errors.full_messages.to_sentence })
     end
